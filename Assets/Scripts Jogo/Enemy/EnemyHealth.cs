@@ -40,7 +40,6 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Gizmo para mostrar a saúde (opcional)
     private void OnDrawGizmos()
     {
         // Barra de saúde visual

@@ -95,7 +95,7 @@ public class EnemyGround : MonoBehaviour
         }
     }
 
-    // Visualização no editor
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
