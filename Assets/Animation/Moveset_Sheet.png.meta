@@ -1,7 +1,22 @@
 fileFormatVersion: 2
-guid: ef5ec0628a6117a4da2fc6bca61861b4
+guid: a766aa1615243de4e819d59489b0f14e
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -7216197676538510616
+    second: Moveset_Sheet_0
+  - first:
+      213: -317736521458909448
+    second: Moveset_Sheet_1
+  - first:
+      213: 424973600986741108
+    second: Moveset_Sheet_2
+  - first:
+      213: -36377521272731274
+    second: Moveset_Sheet_3
+  - first:
+      213: 2330645036119635873
+    second: Moveset_Sheet_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -34,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,106 +108,115 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Server
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PC Computer - Hollow Knight - Gruzzer_0
+      name: Moveset_Sheet_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 237
-        width: 99
-        height: 118
+        x: 0
+        y: 0
+        width: 1517
+        height: 2775
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5c4b09ccf52e4d845aeb2b608c68d670
-      internalID: -406954033
+      spriteID: 8e24cec327aeadb90800000000000000
+      internalID: -7216197676538510616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC Computer - Hollow Knight - Gruzzer_1
+      name: Moveset_Sheet_1
       rect:
         serializedVersion: 2
-        x: 105
-        y: 237
-        width: 99
-        height: 118
+        x: 1738
+        y: 0
+        width: 1872
+        height: 2400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c07f88c85da19804a85da80b6e5f0dea
-      internalID: -1983014699
+      spriteID: 8fef542315c279bf0800000000000000
+      internalID: -317736521458909448
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC Computer - Hollow Knight - Gruzzer_2
+      name: Moveset_Sheet_2
       rect:
         serializedVersion: 2
-        x: 207
-        y: 237
-        width: 99
-        height: 118
+        x: 3760
+        y: 0
+        width: 1858
+        height: 2044
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b242442faa9728645a5661b907967181
-      internalID: 1097365348
+      spriteID: 479bbbd0d3fc5e500800000000000000
+      internalID: 424973600986741108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC Computer - Hollow Knight - Gruzzer_3
+      name: Moveset_Sheet_3
       rect:
         serializedVersion: 2
-        x: 309
-        y: 237
-        width: 99
-        height: 118
+        x: 5626
+        y: 0
+        width: 3603
+        height: 1759
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: cffa385db833fab40b6815b2de45d148
-      internalID: -382467134
+      spriteID: 679cabe46d2ce7ff0800000000000000
+      internalID: -36377521272731274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moveset_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 9227
+        y: 0
+        width: 1896
+        height: 2222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a73073ef4d185020800000000000000
+      internalID: 2330645036119635873
       vertices: []
       indices: 
       edges: []
@@ -201,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -211,10 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PC Computer - Hollow Knight - Gruzzer_0: -1616888430
-      PC Computer - Hollow Knight - Gruzzer_1: -1002189903
-      PC Computer - Hollow Knight - Gruzzer_2: -406954033
-      PC Computer - Hollow Knight - Gruzzer_3: -1983014699
+      Moveset_Sheet_0: -7216197676538510616
+      Moveset_Sheet_1: -317736521458909448
+      Moveset_Sheet_2: 424973600986741108
+      Moveset_Sheet_3: -36377521272731274
+      Moveset_Sheet_4: 2330645036119635873
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,6 @@
 using TarodevController;
 using UnityEngine;
+using System;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask breakableLayer;
     [SerializeField] private float attackRate = 2f;
 
+    // Evento para notificar quando o jogador ataca
+    public event Action OnAttack;
+
     private PlayerController playerController;
     private float nextAttackTime = 0f;
     private Vector3 initialAttackPointLocal;
@@ -18,19 +22,13 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerController = GetComponent<PlayerController>();
-
-   
-
-      
         initialAttackPointLocal = attackPoint.localPosition;
     }
 
     void Update()
     {
-        
         if (Time.time >= nextAttackTime)
         {
-           
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Attack();
@@ -39,17 +37,17 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    void Attack()
+    public void Attack()
     {
         Debug.Log("Player is attacking!");
 
-      
+        // Dispara o evento de ataque para a animação
+        OnAttack?.Invoke();
+
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
 
-     
         foreach (Collider2D hit in hitObjects)
         {
-         
             if (((1 << hit.gameObject.layer) & enemyLayer) != 0)
             {
                 EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
@@ -60,24 +58,20 @@ public class PlayerAttack : MonoBehaviour
                     enemyHealth.TakeDamage(attackDamage);
                     Debug.Log($"Hit enemy: {hit.name}");
 
-            
                     if (flyingEnemy != null)
                     {
-               
                         Vector2 knockbackDir = (hit.transform.position - transform.position).normalized;
                         flyingEnemy.ApplyKnockback(knockbackDir);
                     }
                 }
             }
 
-         
             if (((1 << hit.gameObject.layer) & breakableLayer) != 0)
             {
-               
                 BreakableWall wall = hit.GetComponent<BreakableWall>();
                 if (wall != null)
                 {
-                    wall.TakeDamage(1); 
+                    wall.TakeDamage(1);
                     Debug.Log($"Hit breakable wall: {hit.name}");
                 }
             }

@@ -52954,6 +52954,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7069483670114291128, guid: 635f2466e4445bd4c81779449ac5930d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: 043e7da487e91fb4982188700128b0e8, type: 3}
+    - target: {fileID: 7069483670114291128, guid: 635f2466e4445bd4c81779449ac5930d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -57566,6 +57574,14 @@ PrefabInstance:
     - target: {fileID: 5003449027939116382, guid: 635f2466e4445bd4c81779449ac5930d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7069483670114291128, guid: 635f2466e4445bd4c81779449ac5930d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: 043e7da487e91fb4982188700128b0e8, type: 3}
+    - target: {fileID: 7069483670114291128, guid: 635f2466e4445bd4c81779449ac5930d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

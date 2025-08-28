@@ -31,25 +31,31 @@ namespace TarodevController
 
         private AudioSource _source;
         private IPlayerController _player;
+        private PlayerAttack _playerAttack;
         private Rigidbody2D _rb;
         private bool _grounded;
         private bool _wasRising; // Para detectar quando para de subir
         private float _previousYVelocity;
         private ParticleSystem.MinMaxGradient _currentGradient;
 
-
-
         private void Awake()
         {
             _source = GetComponent<AudioSource>();
             _player = GetComponentInParent<IPlayerController>();
             _rb = GetComponentInParent<Rigidbody2D>();
+            _playerAttack = GetComponentInParent<PlayerAttack>();
         }
 
         private void OnEnable()
         {
             _player.Jumped += OnJumped;
             _player.GroundedChanged += OnGroundedChanged;
+
+            // Conecta o evento de ataque
+            if (_playerAttack != null)
+            {
+                _playerAttack.OnAttack += OnAttack;
+            }
 
             _moveParticles.Play();
         }
@@ -58,6 +64,12 @@ namespace TarodevController
         {
             _player.Jumped -= OnJumped;
             _player.GroundedChanged -= OnGroundedChanged;
+
+            // Remove o evento de ataque
+            if (_playerAttack != null)
+            {
+                _playerAttack.OnAttack -= OnAttack;
+            }
 
             _moveParticles.Stop();
         }
@@ -83,8 +95,6 @@ namespace TarodevController
             }
         }
 
-        
-
         private void CheckLandingTransition()
         {
             if (_grounded) return; // Não precisa verificar se já está no chão
@@ -107,9 +117,6 @@ namespace TarodevController
             // Dispara a animação de começo de queda
             _anim.SetTrigger(FallingKey);
             Debug.Log("Started falling - Land animation triggered");
-
-            // Opcional: tocar som ou partículas de início de queda
-            // _source.PlayOneShot(_fallingSound);
         }
 
         private void HandleSpriteFlip()
@@ -128,6 +135,13 @@ namespace TarodevController
         {
             var runningTilt = _grounded ? Quaternion.Euler(0, 0, _maxTilt * _player.FrameInput.x) : Quaternion.identity;
             _anim.transform.up = Vector3.RotateTowards(_anim.transform.up, runningTilt * Vector2.up, _tiltSpeed * Time.deltaTime, 0f);
+        }
+
+        // Novo método para lidar com animação de ataque
+        private void OnAttack()
+        {
+            _anim.SetTrigger(AttackKey);
+            Debug.Log("Attack animation triggered");
         }
 
         private void OnJumped()
@@ -194,7 +208,6 @@ namespace TarodevController
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int FallingKey = Animator.StringToHash("Falling");
         private static readonly int WallSlideKey = Animator.StringToHash("WallSlide");
+        private static readonly int AttackKey = Animator.StringToHash("Attack");
     }
-
-
 }
