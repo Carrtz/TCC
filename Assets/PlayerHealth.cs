@@ -79,4 +79,15 @@ public class PlayerHealth : MonoBehaviour
     {
         return isInvincible;
     }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
 }
