@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
                 isInvincible = false;
             }
         }
+       
     }
 
     public void TakeDamage(int damage)
@@ -66,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         OnPlayerDeath?.Invoke();
-        gameObject.SetActive(false);
+        SceneManager.LoadScene("Death");
     }
 
     public void Heal(int amount)

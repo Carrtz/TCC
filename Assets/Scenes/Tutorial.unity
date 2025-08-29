@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597948c0fa6acd04e8f5091821cc7316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 3
   deathEffect: {fileID: 0}
   hitEffect: {fileID: 0}
 --- !u!114 &137841854
@@ -3272,28 +3272,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219544805}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &221231919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9167367220621938361, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
-  m_PrefabInstance: {fileID: 1036792437}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &221231920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9167367220621938360, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
   m_PrefabInstance: {fileID: 1036792437}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &221231923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221231919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8d3e892a4d1af545bcb812211380563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1 &227155197
 GameObject:
   m_ObjectHideFlags: 0
@@ -25324,7 +25307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597948c0fa6acd04e8f5091821cc7316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   deathEffect: {fileID: 0}
   hitEffect: {fileID: 0}
 --- !u!114 &589571138
@@ -28175,7 +28158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597948c0fa6acd04e8f5091821cc7316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   deathEffect: {fileID: 0}
   hitEffect: {fileID: 0}
 --- !u!95 &797953892
@@ -31522,9 +31505,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4855596731407334193, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
       insertIndex: 5
       addedObject: {fileID: 886108102}
-    - targetCorrespondingSourceObject: {fileID: 9167367220621938361, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 221231923}
   m_SourcePrefab: {fileID: 100100000, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
 --- !u!1 &1040212064
 GameObject:
@@ -32171,7 +32151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597948c0fa6acd04e8f5091821cc7316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   deathEffect: {fileID: 0}
   hitEffect: {fileID: 0}
 --- !u!95 &1108194194
@@ -32401,7 +32381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597948c0fa6acd04e8f5091821cc7316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   deathEffect: {fileID: 0}
   hitEffect: {fileID: 0}
 --- !u!1 &1122867215
@@ -53107,7 +53087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597948c0fa6acd04e8f5091821cc7316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   deathEffect: {fileID: 0}
   hitEffect: {fileID: 0}
 --- !u!1 &1632156433
@@ -57417,7 +57397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597948c0fa6acd04e8f5091821cc7316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 3
   deathEffect: {fileID: 0}
   hitEffect: {fileID: 0}
 --- !u!95 &2060888124
