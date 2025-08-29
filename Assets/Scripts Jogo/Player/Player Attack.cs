@@ -6,14 +6,14 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private Vector3 attackRange = new Vector3(1, 1, 1);
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask breakableLayer;
     [SerializeField] private float attackRate = 2f;
 
     // Evento para notificar quando o jogador ataca
-    public event Action OnAttack;
+    public static event Action OnAttack;
 
     private PlayerController playerController;
     private float nextAttackTime = 0f;
@@ -41,10 +41,10 @@ public class PlayerAttack : MonoBehaviour
     {
         Debug.Log("Player is attacking!");
 
-        // Dispara o evento de ataque para a animação
+        // Dispara o evento de ataque para a animacao
         OnAttack?.Invoke();
 
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+        Collider2D[] hitObjects = Physics2D.OverlapBoxAll(attackPoint.position, attackRange, 0);
 
         foreach (Collider2D hit in hitObjects)
         {
@@ -76,6 +76,7 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
         }
+
     }
 
     private void OnDrawGizmosSelected()
@@ -83,6 +84,6 @@ public class PlayerAttack : MonoBehaviour
         if (attackPoint == null) return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireCube(attackPoint.position, attackRange);
     }
 }
