@@ -54,7 +54,7 @@ namespace TarodevController
             // Conecta o evento de ataque
             if (_playerAttack != null)
             {
-                _playerAttack.OnAttack += OnAttack;
+                PlayerAttack.OnAttack += OnAttack;
             }
 
             _moveParticles.Play();
@@ -68,7 +68,7 @@ namespace TarodevController
             // Remove o evento de ataque
             if (_playerAttack != null)
             {
-                _playerAttack.OnAttack -= OnAttack;
+                PlayerAttack.OnAttack -= OnAttack;
             }
 
             _moveParticles.Stop();
@@ -97,14 +97,14 @@ namespace TarodevController
 
         private void CheckLandingTransition()
         {
-            if (_grounded) return; // Não precisa verificar se já está no chão
+            if (_grounded) return; // Nï¿½o precisa verificar se jï¿½ estï¿½ no chï¿½o
 
             float currentYVelocity = _rb.linearVelocity.y;
 
-            // Detecta a transição de subida para descida (pico do pulo)
+            // Detecta a transiï¿½ï¿½o de subida para descida (pico do pulo)
             if (_wasRising && currentYVelocity <= 0)
             {
-                // Começou a cair - dispara a animação de land/queda
+                // Comeï¿½ou a cair - dispara a animaï¿½ï¿½o de land/queda
                 OnStartFalling();
             }
 
@@ -114,7 +114,7 @@ namespace TarodevController
 
         private void OnStartFalling()
         {
-            // Dispara a animação de começo de queda
+            // Dispara a animaï¿½ï¿½o de comeï¿½o de queda
             _anim.SetTrigger(FallingKey);
             Debug.Log("Started falling - Land animation triggered");
         }
@@ -137,7 +137,7 @@ namespace TarodevController
             _anim.transform.up = Vector3.RotateTowards(_anim.transform.up, runningTilt * Vector2.up, _tiltSpeed * Time.deltaTime, 0f);
         }
 
-        // Novo método para lidar com animação de ataque
+        // Novo mï¿½todo para lidar com animaï¿½ï¿½o de ataque
         private void OnAttack()
         {
             _anim.SetTrigger(AttackKey);
@@ -157,7 +157,7 @@ namespace TarodevController
                 _jumpParticles.Play();
             }
 
-            _wasRising = true; // Começou a subir
+            _wasRising = true; // Comeï¿½ou a subir
         }
 
         private void OnGroundedChanged(bool grounded, float impact)
@@ -170,7 +170,7 @@ namespace TarodevController
                 SetColor(_landParticles);
 
                 _anim.SetTrigger(GroundedKey);
-                _anim.ResetTrigger(FallingKey); // Reseta a animação de queda ao tocar o chão
+                _anim.ResetTrigger(FallingKey); // Reseta a animaï¿½ï¿½o de queda ao tocar o chï¿½o
 
                 _source.PlayOneShot(_footsteps[Random.Range(0, _footsteps.Length)]);
                 _moveParticles.Play();
@@ -178,7 +178,7 @@ namespace TarodevController
                 _landParticles.transform.localScale = Vector3.one * Mathf.InverseLerp(0, 40, impact);
                 _landParticles.Play();
 
-                _wasRising = false; // Reset ao tocar o chão
+                _wasRising = false; // Reset ao tocar o chï¿½o
             }
             else
             {
