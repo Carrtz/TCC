@@ -1,18 +1,48 @@
-using TarodevController;
 using UnityEngine;
 
-public class Flip : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
-    public FrameInput _frameInput;
+    private SpriteRenderer spriteRenderer;
+    private bool isFacingLeft = false;
 
-    private void FixedUpdate()
-  
-   {
-        if (_frameInput.Move.x == 0) return;
-
-        float scaleX = Mathf.Abs(transform.localScale.x) * Mathf.Sign(_frameInput.Move.x);
-        transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-}
+    void Update()
+    {
+        // Check if enemy needs to face left (example: based on player position)
+        if (ShouldFaceLeft() && !isFacingLeft)
+        {
+            FaceLeft();
+        }
+        else if (!ShouldFaceLeft() && isFacingLeft)
+        {
+            FaceRight();
+        }
+    }
 
+    bool ShouldFaceLeft()
+    {
+        // Example: face left when player is to the left
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            return player.transform.position.x < transform.position.x;
+        }
+        return false;
+    }
+
+    void FaceLeft()
+    {
+        spriteRenderer.flipX = true;
+        isFacingLeft = true;
+    }
+
+    void FaceRight()
+    {
+        spriteRenderer.flipX = false;
+        isFacingLeft = false;
+    }
+}
