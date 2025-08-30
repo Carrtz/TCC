@@ -8,7 +8,8 @@ namespace TarodevController
     {
         [SerializeField] private ScriptableStats _stats;
         [Header("Attack Settings")]
-        [SerializeField] private float _attackSlowdownFactor = 0.3f;
+        [SerializeField] private float _attackSlowdownFactor = 0.1f;
+        // o tanto que ele slowdown
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
         public FrameInput _frameInput;
@@ -72,7 +73,7 @@ namespace TarodevController
     private IEnumerator AttackDelay()
     {
         // aqui que você muda o tempo que ele fica sem poder se mexer quando ataca
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         AttackingIsTrue = false;
     }
 
