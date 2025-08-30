@@ -3,19 +3,43 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public bool IsPickedUp { get; private set; } = false;
+    public static bool HasKey { get; private set; } = false;
 
     public void PickUp(Transform holder)
     {
         IsPickedUp = true;
-        transform.SetParent(holder); // Define o jogador como "pai" do item
-        transform.localPosition = Vector3.zero; // Centraliza o item no jogador
-        GetComponent<Collider2D>().enabled = false; // Desativa o colisor para evitar colisões indesejadas
+        HasKey = true;
+        transform.SetParent(holder);
+        transform.localPosition = Vector3.zero;
+        GetComponent<Collider2D>().enabled = false;
+
+        // Opcional: desativar renderizador para fazer a chave "desaparecer"
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        Debug.Log("Chave coletada!");
     }
 
     public void Drop()
     {
         IsPickedUp = false;
-        transform.SetParent(null); // Remove o "pai" do item
-        GetComponent<Collider2D>().enabled = true; // Reativa o colisor
+        HasKey = false;
+        transform.SetParent(null);
+        GetComponent<Collider2D>().enabled = true;
+
+        // Opcional: reativar renderizador
+        GetComponent<SpriteRenderer>().enabled = true;
+
+        Debug.Log("Chave largada!");
+    }
+
+    // Método para destruir a chave
+    public void ConsumeKey()
+    {
+        if (IsPickedUp)
+        {
+            HasKey = false;
+            Destroy(gameObject);
+            Debug.Log("Chave foi usada e destruída!");
+        }
     }
 }

@@ -18,6 +18,8 @@ public class PlayerAttack : MonoBehaviour
     private PlayerController playerController;
     private float nextAttackTime = 0f;
     private Vector3 initialAttackPointLocal;
+    private int attackCooldownFrames = 0; // Contador de frames de cooldown
+    private const int COOLDOWN_FRAMES = 10; // Cooldown de 10 frames
 
     void Start()
     {
@@ -27,12 +29,19 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= nextAttackTime)
+        // Atualiza o cooldown baseado em frames
+        if (attackCooldownFrames > 0)
+        {
+            attackCooldownFrames--;
+        }
+
+        if (Time.time >= nextAttackTime && attackCooldownFrames <= 0)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
+                attackCooldownFrames = COOLDOWN_FRAMES; // Inicia o cooldown de frames
             }
         }
     }
@@ -76,7 +85,19 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
         }
+    }
 
+    // Método para verificar se o jogador pode atacar (útil para UI de cooldown)
+    public bool CanAttack()
+    {
+        return attackCooldownFrames <= 0 && Time.time >= nextAttackTime;
+    }
+
+    // Método para obter o progresso do cooldown (0 a 1, útil para UI)
+    public float GetCooldownProgress()
+    {
+        if (attackCooldownFrames <= 0) return 1f;
+        return 1f - ((float)attackCooldownFrames / COOLDOWN_FRAMES);
     }
 
     private void OnDrawGizmosSelected()

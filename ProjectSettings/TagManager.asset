@@ -8,6 +8,8 @@ TagManager:
   - Quebravel
   - NPC
   - playerHealth
+  - OpenDoor
+  - Item
   layers:
   - Default
   - TransparentFX

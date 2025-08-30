@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,13 +15,15 @@ public class Enemy : MonoBehaviour
     public float health;
     public float speed = 2f;
     public float stoppingDistance = 0.5f;
-    [SerializeField] private bool Die; 
+
+    public PlayerHealth playerHealth;
+
 
    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // anim = GetComponent<Animator>(); 
+        // anim = GetComp 
 
         currentTargetPoint = PointB.transform;
     }
@@ -30,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
         if(health <= 0)
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene("Death");
         }
       
         Vector2 direction = (currentTargetPoint.position - transform.position).normalized;
@@ -83,14 +86,8 @@ public class Enemy : MonoBehaviour
         
         if (col.gameObject.CompareTag("Player"))
         {
-           
-            Die = true;
-            print("jogador atingido");
+            playerHealth.TakeDamage(1);
+          
         }
-    }
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        Debug.Log(damage);
     }
 }
