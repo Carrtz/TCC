@@ -1,12 +1,14 @@
 using System;
-    using UnityEngine;
-    
+using UnityEngine;
+using System.Collections;
 namespace TarodevController
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class PlayerController : MonoBehaviour, IPlayerController
     {
         [SerializeField] private ScriptableStats _stats;
+        [Header("Attack Settings")]
+        [SerializeField] private float _attackSlowdownFactor = 0.1f;
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
         public FrameInput _frameInput;
@@ -22,6 +24,7 @@ namespace TarodevController
         private int _currentDirection = 1;
         [SerializeField] private Transform _visual;
         public bool IsWallSliding => _isWallSliding;
+        public bool AttackingIsTrue = false;
 
 
 
@@ -45,7 +48,36 @@ namespace TarodevController
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
         }
 
+        #region AttackMotionless
+        void Start()
+        {
+            PlayerAttack.OnAttack += Attacking;
+        }
         
+            void OnDestroy()
+        {
+            PlayerAttack.OnAttack -= Attacking;
+        }
+
+        private void Attacking()
+        {
+            AttackingIsTrue = true;
+
+            _frameVelocity *= _attackSlowdownFactor;
+            _rb.linearVelocity *= _attackSlowdownFactor;
+
+            StartCoroutine(AttackDelay());
+        }
+
+    private IEnumerator AttackDelay()
+    {
+        // aqui que você muda o tempo que ele fica sem poder se mexer quando ataca
+        yield return new WaitForSeconds(0.2f);
+        AttackingIsTrue = false;
+    }
+
+    #endregion
+
         public ScriptableStats GetStats()
         {
             return _stats;
@@ -207,6 +239,12 @@ namespace TarodevController
 
         private void HandleGravity()
         {
+
+            if (AttackingIsTrue == true)
+            {
+                return;
+            }
+
             if (_grounded && _frameVelocity.y <= 0f)
             {
                 _frameVelocity.y = _stats.GroundingForce;
@@ -229,6 +267,12 @@ namespace TarodevController
 
         private void HandleJump()
         {
+            
+            if (AttackingIsTrue == true)
+            {
+                return;
+            }
+
             if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.linearVelocity.y > 0) _endedJumpEarly = true;
 
             if (!_jumpToConsume && !HasBufferedJump) return;
@@ -267,6 +311,11 @@ namespace TarodevController
 
         private void HandleDirection()
         {
+            if (AttackingIsTrue == true)
+            {
+                return;
+            }
+
             if (_frameInput.Move.x == 0)
             {
                 var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;

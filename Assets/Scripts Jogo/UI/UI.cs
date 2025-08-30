@@ -16,7 +16,7 @@ public class UI : MonoBehaviour
 
     private void OnButtonPlay()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("TutorialFinal");
     }
     private void OnButtonOptions()
     {
