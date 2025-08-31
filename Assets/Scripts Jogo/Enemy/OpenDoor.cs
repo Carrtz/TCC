@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class OpenDoor : MonoBehaviour
 {
-    public float interactionDistance = 2f; // Distância máxima para interagir com a porta
+    public float interactionDistance = 2f; // Distï¿½ncia mï¿½xima para interagir com a porta
     public KeyCode interactionKey = KeyCode.G; // Tecla para interagir
 
     private Transform player;
-    private TimerManager timer; // Referência para o script Timer
+    private TimerManager timer; // Referï¿½ncia para o script Timer
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class OpenDoor : MonoBehaviour
 
     void Update()
     {
-        // Verificar se o jogador está perto o suficiente e pressionou a tecla
+        // Verificar se o jogador estï¿½ perto o suficiente e pressionou a tecla
         if (Vector2.Distance(transform.position, player.position) <= interactionDistance &&
             Input.GetKeyDown(interactionKey))
         {
@@ -32,45 +32,15 @@ public class OpenDoor : MonoBehaviour
     {
         if (Item.HasKey)
         {
-            // Salvar o tempo final antes de carregar a cena
-            SaveFinalTime();
-
-            // Carregar a cena de vitória
-            SceneManager.LoadScene("Win");
+            Destroy(gameObject);
         }
         else
         {
-            Debug.Log("Você precisa da chave para abrir esta porta!");
+            Debug.Log("Vocï¿½ precisa da chave para abrir esta porta!");
         }
     }
 
-    void SaveFinalTime()
-    {
-        // Se encontrou o timer, salvar o tempo final no GameManager
-        if (timer != null)
-        {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.PlayerWins(timer.GetCurrentTime());
-            }
-            else
-            {
-                Debug.LogWarning("GameManager não encontrado. Criando um temporário...");
-
-                // Criar um GameManager temporário se não existir
-                GameObject gmObject = new GameObject("TempGameManager");
-                GameManager tempGM = gmObject.AddComponent<GameManager>();
-                tempGM.PlayerWins(timer.GetCurrentTime());
-                DontDestroyOnLoad(gmObject);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Timer não encontrado na cena. Não foi possível salvar o tempo final.");
-        }
-    }
-
-    // Opcional: Desenhar gizmo para visualizar a distância de interação
+    // Opcional: Desenhar gizmo para visualizar a distï¿½ncia de interaï¿½ï¿½o
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
