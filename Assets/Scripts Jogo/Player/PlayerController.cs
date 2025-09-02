@@ -8,7 +8,7 @@ namespace TarodevController
     {
         [SerializeField] private ScriptableStats _stats;
         [Header("Attack Settings")]
-        [SerializeField] private float _attackSlowdownFactor = 0.1f;
+        [SerializeField] private float _attackSlowdownFactor = 0.001f;
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
         public FrameInput _frameInput;
