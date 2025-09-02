@@ -13,9 +13,6 @@ public class OpenDoor : MonoBehaviour
     {
         // Encontrar o jogador pela tag
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        // Tentar encontrar o script Timer na cena
-        timer = FindObjectOfType<TimerManager>();
     }
 
     void Update()

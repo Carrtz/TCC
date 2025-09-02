@@ -83,7 +83,6 @@ namespace TarodevController
             HandleIdleSpeed();
             HandleCharacterTilt();
             CheckLandingTransition();
-
             HandleWallSlide();
         }
 
