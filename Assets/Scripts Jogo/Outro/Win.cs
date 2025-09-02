@@ -4,6 +4,12 @@ using UnityEngine.SceneManagement;
 public class Win : MonoBehaviour
 {
     private TimerManager timer;
+
+    void Start()
+    {
+        // Tentar encontrar o script Timer na cena
+        timer = FindObjectOfType<TimerManager>();
+    }
     void SaveFinalTime()
     {
         // Se encontrou o timer, salvar o tempo final no GameManager
