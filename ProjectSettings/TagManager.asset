@@ -10,6 +10,7 @@ TagManager:
   - playerHealth
   - OpenDoor
   - Item
+  - chao
   layers:
   - Default
   - TransparentFX
