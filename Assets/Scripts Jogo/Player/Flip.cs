@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class Flip : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private bool isFacingLeft = false;

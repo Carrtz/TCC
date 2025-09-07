@@ -26,6 +26,12 @@ namespace TarodevController
         public bool IsWallSliding => _isWallSliding;
         public bool AttackingIsTrue = false;
 
+       
+        private bool _isDashing;
+        private float _dashTimeLeft;
+        private float _lastDashTime;
+
+
 
 
         private bool _isHoldingItem => _currentItem != null;
@@ -148,7 +154,29 @@ namespace TarodevController
                 _jumpToConsume = true;
                 _timeJumpWasPressed = _time;
             }
+        
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                TryStartDash();
+            }
+
         }
+
+        private void TryStartDash()
+        {
+            if (_isDashing) return;
+
+            if (Time.time >= _lastDashTime + _stats.DashCooldown)
+            {
+                _isDashing = true;
+                _dashTimeLeft = _stats.DashDuration;
+                _lastDashTime = Time.time;
+
+                // define direção do dash (esquerda ou direita)
+                _frameVelocity = new Vector2(_currentDirection * _stats.DashSpeed, 0);
+            }
+        }
+
 
         private void FixedUpdate()
         {
@@ -167,6 +195,7 @@ namespace TarodevController
             {
                 _canWallJump = true;
             }
+            HandleDash();
 
             ApplyMovement();
         }
@@ -326,6 +355,21 @@ namespace TarodevController
                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
             }
         }
+        private void HandleDash()
+{
+    if (_isDashing)
+    {
+        if (_dashTimeLeft > 0)
+        {
+            _frameVelocity = new Vector2(_currentDirection * _stats.DashSpeed, 0);
+            _dashTimeLeft -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            _isDashing = false;
+        }
+    }
+}
 
         private void Flip()
         {
@@ -346,6 +390,7 @@ namespace TarodevController
               
                 if (_frameInput.Move.x != 0)
                 {
+                    _currentDirection = (int)Mathf.Sign(_frameInput.Move.x);
                     float scaleX = Mathf.Abs(_visual.localScale.x) * Mathf.Sign(_frameInput.Move.x);
                     _visual.localScale = new Vector3(scaleX, _visual.localScale.y, _visual.localScale.z);
                     transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);

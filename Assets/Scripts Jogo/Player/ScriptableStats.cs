@@ -68,6 +68,17 @@ namespace TarodevController
         public float ParryRange = 1.5f;
         public LayerMask ParryableLayers;
         public bool InvincibleDuringParry = true;
+
+        [Header("DASH")]
+        [Tooltip("Velocidade aplicada durante o dash")]
+        public float DashSpeed = 25f;
+
+        [Tooltip("Duração do dash em segundos")]
+        public float DashDuration = 0.2f;
+
+        [Tooltip("Tempo de recarga do dash em segundos")]
+        public float DashCooldown = 1f;
+
     }
 }
 
