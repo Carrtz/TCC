@@ -12,14 +12,13 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask breakableLayer;
     [SerializeField] private float attackRate = 2f;
 
-    // Evento para notificar quando o jogador ataca
     public static event Action OnAttack;
 
     private PlayerController playerController;
     private float nextAttackTime = 0f;
     private Vector3 initialAttackPointLocal;
-    private int attackCooldownFrames = 0; // Contador de frames de cooldown
-    private const int COOLDOWN_FRAMES = 10; // Cooldown de 10 frames
+    private int attackCooldownFrames = 0;
+    private const int COOLDOWN_FRAMES = 10;
 
     void Start()
     {
@@ -29,7 +28,6 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        // Atualiza o cooldown baseado em frames
         if (attackCooldownFrames > 0)
         {
             attackCooldownFrames--;
@@ -41,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
-                attackCooldownFrames = COOLDOWN_FRAMES; // Inicia o cooldown de frames
+                attackCooldownFrames = COOLDOWN_FRAMES;
             }
         }
     }
@@ -49,8 +47,6 @@ public class PlayerAttack : MonoBehaviour
     public void Attack()
     {
         Debug.Log("Player is attacking!");
-
-        // Dispara o evento de ataque para a animacao
         OnAttack?.Invoke();
 
         Collider2D[] hitObjects = Physics2D.OverlapBoxAll(attackPoint.position, attackRange, 0);
@@ -61,16 +57,24 @@ public class PlayerAttack : MonoBehaviour
             {
                 EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
                 FlyingEnemy flyingEnemy = hit.GetComponent<FlyingEnemy>();
+                Enemy enemy = hit.GetComponent<Enemy>(); // Adicionado suporte para o inimigo terrestre
 
                 if (enemyHealth != null)
                 {
                     enemyHealth.TakeDamage(attackDamage);
                     Debug.Log($"Hit enemy: {hit.name}");
 
+                    Vector2 knockbackDir = (hit.transform.position - transform.position).normalized;
+                    
+                    // Aplica knockback em ambos os tipos de inimigo
                     if (flyingEnemy != null)
                     {
-                        Vector2 knockbackDir = (hit.transform.position - transform.position).normalized;
                         flyingEnemy.ApplyKnockback(knockbackDir);
+                    }
+                    
+                    if (enemy != null)
+                    {
+                        enemy.ApplyKnockback(knockbackDir);
                     }
                 }
             }
@@ -87,13 +91,11 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // Método para verificar se o jogador pode atacar (útil para UI de cooldown)
     public bool CanAttack()
     {
         return attackCooldownFrames <= 0 && Time.time >= nextAttackTime;
     }
 
-    // Método para obter o progresso do cooldown (0 a 1, útil para UI)
     public float GetCooldownProgress()
     {
         if (attackCooldownFrames <= 0) return 1f;

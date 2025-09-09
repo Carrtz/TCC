@@ -18,7 +18,7 @@ public class EnemyGround : MonoBehaviour
 
     [Header("Damage Settings")]
     [SerializeField] private int contactDamage = 1;
-    [SerializeField] private float damageCooldown = 1f;
+    [SerializeField] private float damageCooldown = 0.01f;
     private float lastDamageTime;
 
 

@@ -9,25 +9,30 @@ public class Enemy : MonoBehaviour
     public GameObject PointB;
 
     private Rigidbody2D rb;
-
     private Transform currentTargetPoint;
 
     public float health;
     public float speed = 2f;
     public float stoppingDistance = 0.5f;
+    public int contactDamage = 1;
+
+    [Header("Knockback Settings")]
+    public float knockbackForce = 8f;
+    public float knockbackDuration = 0.5f;
+    public float knockbackDecay = 0.7f;
+
+    private bool isKnockedBack = false;
+    private float knockbackTimer = 0f;
+    private Vector2 knockbackDirection;
+    private Vector2 movementDirection;
 
     public PlayerHealth playerHealth;
 
-
-   
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // anim = GetComp 
-
         currentTargetPoint = PointB.transform;
     }
-
 
     void Update()
     {
@@ -35,38 +40,68 @@ public class Enemy : MonoBehaviour
         {
             SceneManager.LoadScene("Death");
         }
-      
-        Vector2 direction = (currentTargetPoint.position - transform.position).normalized;
 
-       
-        rb.linearVelocity = new Vector2(direction.x * speed, rb.linearVelocity.y); 
+        HandleKnockback();
+        HandleMovement();
+        HandleFlip();
+        CheckTargetReached();
+    }
 
-        
-        if (direction.x > 0.01f) 
+    void HandleKnockback()
+    {
+        if (isKnockedBack)
         {
-            transform.localScale = new Vector3(1, 1, 1); 
+            knockbackTimer -= Time.deltaTime;
+            if (knockbackTimer <= 0f)
+            {
+                isKnockedBack = false;
+                rb.linearVelocity = movementDirection * speed;
+            }
+            else
+            {
+                float decayFactor = Mathf.Pow(knockbackDecay, Time.deltaTime * 10f);
+                rb.linearVelocity = knockbackDirection * knockbackForce * (knockbackTimer / knockbackDuration);
+            }
         }
-        else if (direction.x < -0.01f) 
-        {
-            transform.localScale = new Vector3(-1, 1, 1); 
-        }
+    }
 
-        
-        if (Vector2.Distance(transform.position, currentTargetPoint.position) < stoppingDistance)
+    void HandleMovement()
+    {
+        if (!isKnockedBack)
         {
-         
+            movementDirection = (currentTargetPoint.position - transform.position).normalized;
+            rb.linearVelocity = new Vector2(movementDirection.x * speed, rb.linearVelocity.y);
+        }
+    }
+
+    void HandleFlip()
+    {
+        if (!isKnockedBack)
+        {
+            if (movementDirection.x > 0.01f) 
+            {
+                transform.localScale = new Vector3(1, 1, 1); 
+            }
+            else if (movementDirection.x < -0.01f) 
+            {
+                transform.localScale = new Vector3(-1, 1, 1); 
+            }
+        }
+    }
+
+    void CheckTargetReached()
+    {
+        if (!isKnockedBack && Vector2.Distance(transform.position, currentTargetPoint.position) < stoppingDistance)
+        {
             if (currentTargetPoint == PointB.transform)
             {
                 currentTargetPoint = PointA.transform;
             }
-           
             else if (currentTargetPoint == PointA.transform)
             {
                 currentTargetPoint = PointB.transform;
             }
         }
-
-        // anim.SetBool("isRunning", rb.velocity.x != 0); 
     }
 
     void OnDrawGizmos()
@@ -80,14 +115,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
- 
     void OnCollisionEnter2D(Collision2D col)
     {
-        
         if (col.gameObject.CompareTag("Player"))
         {
-            playerHealth.TakeDamage(1);
-          
+            playerHealth.TakeDamage(contactDamage);
         }
+    }
+
+    public void ApplyKnockback(Vector2 direction)
+    {
+        isKnockedBack = true;
+        knockbackTimer = knockbackDuration;
+        knockbackDirection = direction.normalized;
     }
 }

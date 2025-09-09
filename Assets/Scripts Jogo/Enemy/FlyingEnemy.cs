@@ -8,33 +8,30 @@ public class FlyingEnemy : MonoBehaviour
     public int contactDamage = 1;
 
     [Header("Knockback Settings")]
-    public float knockbackForce = 5f;
-    public float knockbackDuration = 0.2f;
+    public float knockbackForce = 8f;
+    public float knockbackDuration = 0.5f;
+    public float knockbackDecay = 0.7f;
 
     private GameObject player;
+    private Rigidbody2D rb;
     private bool isKnockedBack = false;
     private float knockbackTimer = 0f;
     private Vector2 knockbackDirection;
+    private Vector2 movementDirection;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         if (player == null) return;
 
-        if (isKnockedBack)
-        {
-            knockbackTimer -= Time.deltaTime;
-            if (knockbackTimer <= 0f)
-            {
-                isKnockedBack = false;
-            }
-            transform.Translate(knockbackDirection * knockbackForce * Time.deltaTime, Space.World);
-        }
-        else
+        HandleKnockback();
+        
+        if (!isKnockedBack)
         {
             if (chase)
                 Chase();
@@ -43,6 +40,44 @@ public class FlyingEnemy : MonoBehaviour
         }
 
         Flip();
+    }
+
+    void HandleKnockback()
+    {
+        if (isKnockedBack)
+        {
+            knockbackTimer -= Time.deltaTime;
+            if (knockbackTimer <= 0f)
+            {
+                isKnockedBack = false;
+                rb.linearVelocity = movementDirection * speed;
+            }
+            else
+            {
+                float decayFactor = Mathf.Pow(knockbackDecay, Time.deltaTime * 10f);
+                rb.linearVelocity = knockbackDirection * knockbackForce * (knockbackTimer / knockbackDuration);
+            }
+        }
+    }
+
+    private void ReturnEnemy()
+    {
+        movementDirection = (startingPoint.position - transform.position).normalized;
+        rb.linearVelocity = movementDirection * speed;
+    }
+
+    private void Chase()
+    {
+        movementDirection = (player.transform.position - transform.position).normalized;
+        rb.linearVelocity = movementDirection * speed;
+    }
+
+    private void Flip()
+    {
+        if (player != null && transform.position.x > player.transform.position.x)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -68,38 +103,17 @@ public class FlyingEnemy : MonoBehaviour
 
         if (playerHealth != null)
         {
-            // Verifica se o jogador está aparando o contato
             if (playerParry != null && playerParry.CanBlockAttack(transform.position))
             {
-                // Contato bloqueado - aplica knockback no inimigo
                 Vector2 knockbackDir = (transform.position - playerObject.transform.position).normalized;
                 ApplyKnockback(knockbackDir);
                 Debug.Log("Contato com inimigo voador bloqueado!");
             }
             else
             {
-                // Causa dano por contato
                 playerHealth.TakeDamage(contactDamage);
             }
         }
-    }
-
-    private void ReturnEnemy()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, startingPoint.position, speed * Time.deltaTime);
-    }
-
-    private void Chase()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-    }
-
-    private void Flip()
-    {
-        if (player != null && transform.position.x > player.transform.position.x)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else
-            transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     public void ApplyKnockback(Vector2 direction)
