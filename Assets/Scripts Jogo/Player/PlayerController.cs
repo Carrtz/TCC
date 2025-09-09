@@ -25,8 +25,11 @@ namespace TarodevController
         [SerializeField] private Transform _visual;
         public bool IsWallSliding => _isWallSliding;
         public bool AttackingIsTrue = false;
+        public Transform npc;
+        DialogueSystem dialogueSystem;
 
-       
+
+
         private bool _isDashing;
         private float _dashTimeLeft;
         private float _lastDashTime;
@@ -50,6 +53,7 @@ namespace TarodevController
         {
             _rb = GetComponent<Rigidbody2D>();
             _col = GetComponent<CapsuleCollider2D>();
+            dialogueSystem = FindObjectOfType<DialogueSystem>();
 
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
         }
@@ -95,6 +99,20 @@ namespace TarodevController
             GatherInput();
             CheckForItems();
             Flip();
+            if (Mathf.Abs(transform.position.x - npc.position.x) < 2.0f)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (dialogueSystem != null)
+                    {
+                        dialogueSystem.Next();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("DialogueSystem reference is null");
+                    }
+                }
+            }
         }
 
         private void PickUpItem(Item item)
