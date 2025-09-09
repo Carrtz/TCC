@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 729adb18a82669a4d880ec514693a252
+guid: 143e8f403a1ca87478c5216404062441
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2637403925422779543
-    second: porta_0
+      213: -3311174257707731027
+    second: tileset com quebrado_0
+  - first:
+      213: 3291795877425701437
+    second: tileset com quebrado_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +103,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: porta_0
+      name: tileset com quebrado_0
       rect:
         serializedVersion: 2
-        x: 278
-        y: 0
-        width: 600
-        height: 961
+        x: 480
+        y: 600
+        width: 120
+        height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79cab0885e0f99420800000000000000
-      internalID: 2637403925422779543
+      spriteID: da7b9e35e885c02d0800000000000000
+      internalID: -3311174257707731027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 600
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32ed0be8eecead20800000000000000
+      internalID: 3291795877425701437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 599
+        width: 240
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3f0d3ab6974e534181ab8a331dc8f16
+      internalID: 1150224087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 480
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 514ef8a2810e91f4b8ebde54b1ae1617
+      internalID: 937303549
       vertices: []
       indices: 
       edges: []
@@ -125,7 +194,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d26eac0e9ba64994d975a0b9ca144a30
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +202,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":120.0,"y":120.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      porta_0: 2637403925422779543
+      tileset com quebrado_0: -3311174257707731027
+      tileset com quebrado_1: 3291795877425701437
+      tileset com quebrado_2: 1150224087
+      tileset com quebrado_3: 937303549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
