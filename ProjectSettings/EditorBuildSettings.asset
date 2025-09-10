@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Win.unity
     guid: 3813fa331ad06d3488fe4ece37f89771
   - enabled: 0
-    path: Assets/Scenes/Tutorial.unity
+    path: Assets/Scenes/(OLD) TutorialFinal.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
