@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
     }
     private void OnButtonOptions()
     {
-        Debug.Log("Options");
+        SceneManager.LoadScene("Ranking");
     }
     private void OnButtonExit()
     {

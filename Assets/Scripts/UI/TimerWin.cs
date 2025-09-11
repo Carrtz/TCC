@@ -1,70 +1,78 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TimerWin : MonoBehaviour
 {
-    [Header("UI Reference")]
+    [Header("UI References")]
     [SerializeField] private TMP_Text finalTimeText;
-
-    private string winSceneName = "Win";
-
-  
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Se n„o estivermos mais na cena de vitÛria, destruir este objeto
-        if (scene.name != winSceneName)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            // Se estamos na cena de vitÛria, encontrar a UI e mostrar o tempo
-            FindFinalTimeUI();
-            DisplayFinalTime();
-        }
-    }
+    [SerializeField] private TMP_Text recordText;
+    [SerializeField] private GameObject newRecordEffect;
+    [SerializeField] private Button rankingButton;
+    [SerializeField] private Button menuButton;
 
     void Start()
     {
-        // Configurar a UI
-        FindFinalTimeUI();
-        DisplayFinalTime();
-    }
-
-    private void FindFinalTimeUI()
-    {
-        // Procurar o texto do tempo final na cena
-        if (finalTimeText == null)
-        {
-            finalTimeText = GameObject.Find("FinalTimeText")?.GetComponent<TMP_Text>();
-        }
-
-        // Se n„o encontrou, tentar encontrar por tag
-        if (finalTimeText == null)
-        {
-            GameObject finalTimeObj = GameObject.FindGameObjectWithTag("FinalTimeUI");
-            if (finalTimeObj != null) finalTimeText = finalTimeObj.GetComponent<TMP_Text>();
-        }
-    }
-
-    private void DisplayFinalTime()
-    {
-        if (finalTimeText != null && GameManager.Instance != null)
+        if (GameManager.Instance != null)
         {
             float finalTime = GameManager.Instance.GetFinalTime();
-            finalTimeText.text = "Tempo Final: " + FormatTime(finalTime);
-            Debug.Log("Tempo final exibido: " + FormatTime(finalTime));
+            DisplayFinalTime(finalTime);
+            CheckRecord(finalTime);
         }
-        else
+
+        // Configurar bot√µes
+        if (rankingButton != null)
         {
-            Debug.LogWarning("Texto para tempo final ou GameManager n„o encontrado");
+            rankingButton.onClick.AddListener(GoToRanking);
         }
+
+        if (menuButton != null)
+        {
+            menuButton.onClick.AddListener(GoToMenu);
+        }
+    }
+
+    private void DisplayFinalTime(float time)
+    {
+        if (finalTimeText != null)
+        {
+            finalTimeText.text = $"Tempo: {FormatTime(time)}";
+        }
+    }
+
+    private void CheckRecord(float time)
+    {
+        if (GameManager.Instance != null)
+        {
+            bool isNewRecord = GameManager.Instance.IsNewRecord(time);
+
+            if (recordText != null)
+            {
+                if (isNewRecord)
+                {
+                    recordText.text = "NOVO RECORDE! üèÜ";
+                    recordText.color = Color.yellow;
+                    if (newRecordEffect != null) newRecordEffect.SetActive(true);
+                }
+                else
+                {
+                    int position = GameManager.Instance.GetPlayerPosition("Player");
+                    recordText.text = $"Posi√ß√£o: #{position}";
+                    recordText.color = Color.white;
+                }
+            }
+        }
+    }
+
+    private void GoToRanking()
+    {
+        GameManager.Instance.LoadRankingScene();
+    }
+
+    private void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     private string FormatTime(float timeInSeconds)
@@ -72,6 +80,6 @@ public class TimerWin : MonoBehaviour
         int minutes = (int)timeInSeconds / 60;
         int seconds = (int)timeInSeconds % 60;
         int milliseconds = (int)(timeInSeconds * 100) % 100;
-        return string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, milliseconds);
+        return $"{minutes:00}:{seconds:00}.{milliseconds:00}";
     }
 }

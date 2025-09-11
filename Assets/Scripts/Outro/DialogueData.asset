@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4275996de4cbbf43a0eacdd569943e0, type: 3}
   m_Name: DialogueData
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  talkScript: []
+  talkScript:
+  - name: Player
+    text: teste
