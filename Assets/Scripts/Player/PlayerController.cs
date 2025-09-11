@@ -27,7 +27,7 @@ namespace TarodevController
         public bool AttackingIsTrue = false;
         public Transform npc;
         DialogueSystem dialogueSystem;
-
+        public event Action Dashed;
 
 
         private bool _isDashing;
@@ -192,6 +192,9 @@ namespace TarodevController
 
                 // define direção do dash (esquerda ou direita)
                 _frameVelocity = new Vector2(_currentDirection * _stats.DashSpeed, 0);
+
+                // Dispara o evento de dash
+                Dashed?.Invoke();
             }
         }
 
@@ -365,8 +368,17 @@ namespace TarodevController
 
             if (_frameInput.Move.x == 0)
             {
-                var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;
+                // Aumentar a desaceleração quando no chão para parar mais rápido
+                var deceleration = _grounded ? _stats.GroundDeceleration * 1.5f : _stats.AirDeceleration;
+
+                // Aplicar desaceleração mais agressiva
                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, deceleration * Time.fixedDeltaTime);
+
+                // Se a velocidade for muito baixa, definir como zero imediatamente
+                if (Mathf.Abs(_frameVelocity.x) < 0.1f)
+                {
+                    _frameVelocity.x = 0f;
+                }
             }
             else
             {
@@ -441,6 +453,7 @@ namespace TarodevController
     {
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
+        public event Action Dashed; // Novo evento para dash
         public Vector2 FrameInput { get; }
     }
 }

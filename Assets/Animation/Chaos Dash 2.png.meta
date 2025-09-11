@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e6b50a41751e9f94883aab5d1085cc21
+guid: 68d6f6b8607b3b54e938489af2fd9a46
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 507447416334615174
-    second: Corrida6_0
+      213: -6690032209603131551
+    second: Chaos Dash 2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,10 +48,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Corrida6_0
+      name: Chaos Dash 2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68280d09cb0da0700800000000000000
-      internalID: 507447416334615174
+      spriteID: 1670fa2962b3823a0800000000000000
+      internalID: -6690032209603131551
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1efb4299b4043804c8391db31ef55e3e
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Corrida6_0: 507447416334615174
+      Chaos Dash 2_0: -6690032209603131551
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
