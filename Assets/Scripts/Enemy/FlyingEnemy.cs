@@ -12,8 +12,13 @@ public class FlyingEnemy : MonoBehaviour
     public float knockbackDuration = 0.5f;
     public LayerMask wallLayer = 1 << 7;
 
+    [Header("Player Push Settings")]
+    public float playerPushForce = 10f;
+    public float pushCheckDistance = 0.5f;
+
     private GameObject player;
     private Rigidbody2D rb;
+    private Rigidbody2D playerRb;
     private WallCollisionHandler wallCollisionHandler;
     private bool isKnockedBack = false;
     private float knockbackTimer = 0f;
@@ -24,7 +29,12 @@ public class FlyingEnemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
-        
+
+        if (player != null)
+        {
+            playerRb = player.GetComponent<Rigidbody2D>();
+        }
+
         wallCollisionHandler = gameObject.AddComponent<WallCollisionHandler>();
         wallCollisionHandler.wallLayer = wallLayer;
     }
@@ -33,7 +43,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         if (player == null) return;
         HandleKnockback();
-        
+
         if (!isKnockedBack && !wallCollisionHandler.IsAgainstWall())
         {
             if (chase)
@@ -41,6 +51,37 @@ public class FlyingEnemy : MonoBehaviour
             else
                 ReturnEnemy();
         }
+
+        // Verificar se o jogador está em cima e empurrar
+        CheckAndPushPlayer();
+    }
+
+    void CheckAndPushPlayer()
+    {
+        if (player == null || playerRb == null) return;
+
+        // Verificar se o jogador está em cima do inimigo
+        Vector2 checkDirection = Vector2.up;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, checkDirection, pushCheckDistance, LayerMask.GetMask("Player"));
+
+        if (hit.collider != null && hit.collider.CompareTag("Player"))
+        {
+            PushPlayerToSide();
+        }
+    }
+
+    void PushPlayerToSide()
+    {
+        if (playerRb == null) return;
+
+        // Determinar a direção do empurrão (esquerda ou direita baseado na posição relativa)
+        float direction = Mathf.Sign(player.transform.position.x - transform.position.x);
+
+        // Aplicar força lateral no jogador
+        Vector2 pushForce = new Vector2(direction * playerPushForce, playerPushForce * 0.5f);
+        playerRb.linearVelocity = new Vector2(pushForce.x, playerRb.linearVelocity.y);
+
+        Debug.Log("Empurrando jogador para o lado! Direção: " + direction);
     }
 
     void HandleKnockback()
@@ -48,7 +89,7 @@ public class FlyingEnemy : MonoBehaviour
         if (isKnockedBack)
         {
             knockbackTimer -= Time.deltaTime;
-            
+
             // Para knockback se atingir parede
             if (wallCollisionHandler.IsAgainstWall())
             {
@@ -69,19 +110,19 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
-private void ReturnEnemy()
-{
-    float distanceToStart = Vector2.Distance(transform.position, startingPoint.position);
-    
-    if (distanceToStart < 0.3f)
+    private void ReturnEnemy()
+    {
+        float distanceToStart = Vector2.Distance(transform.position, startingPoint.position);
+
+        if (distanceToStart < 0.3f)
         {
             rb.linearVelocity = Vector2.zero;
             return;
         }
-    
-    movementDirection = (startingPoint.position - transform.position).normalized;
-    rb.linearVelocity = movementDirection * speed;
-}
+
+        movementDirection = (startingPoint.position - transform.position).normalized;
+        rb.linearVelocity = movementDirection * speed;
+    }
 
     private void Chase()
     {
@@ -130,5 +171,20 @@ private void ReturnEnemy()
         isKnockedBack = true;
         knockbackTimer = knockbackDuration;
         knockbackDirection = direction.normalized;
+    }
+
+    // Visualização do raio de detecção (apenas no Editor)
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * pushCheckDistance);
+
+        // Mostrar direção do empurrão
+        if (Application.isPlaying && player != null)
+        {
+            float direction = Mathf.Sign(player.transform.position.x - transform.position.x);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + new Vector3(direction, 0.5f, 0) * 2f);
+        }
     }
 }
