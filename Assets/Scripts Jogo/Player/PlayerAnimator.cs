@@ -3,40 +3,41 @@ using UnityEngine;
 namespace TarodevController
 {
     /// <summary>
-    /// VERY primitive animator example.
+    /// Animator do Player com correção de escala (evita que Dash/Animações alterem o tamanho).
     /// </summary>
     public class PlayerAnimator : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField]
-        private Animator _anim;
-
+        [SerializeField] private Animator _anim;
         [SerializeField] private SpriteRenderer _sprite;
 
         [Header("Settings")]
-        [SerializeField, Range(1f, 3f)]
-        private float _maxIdleSpeed = 2;
-
+        [SerializeField, Range(1f, 3f)] private float _maxIdleSpeed = 2;
         [SerializeField] private float _maxTilt = 5;
         [SerializeField] private float _tiltSpeed = 20;
 
-        [Header("Particles")][SerializeField] private ParticleSystem _jumpParticles;
+        [Header("Particles")]
+        [SerializeField] private ParticleSystem _jumpParticles;
         [SerializeField] private ParticleSystem _launchParticles;
         [SerializeField] private ParticleSystem _moveParticles;
         [SerializeField] private ParticleSystem _landParticles;
+        [SerializeField] private ParticleSystem _dashParticles;
 
         [Header("Audio Clips")]
-        [SerializeField]
-        private AudioClip[] _footsteps;
+        [SerializeField] private AudioClip[] _footsteps;
+        [SerializeField] private AudioClip _dashSound;
 
         private AudioSource _source;
         private IPlayerController _player;
         private PlayerAttack _playerAttack;
         private Rigidbody2D _rb;
         private bool _grounded;
-        private bool _wasRising; // Para detectar quando para de subir
+        private bool _wasRising;
         private float _previousYVelocity;
         private ParticleSystem.MinMaxGradient _currentGradient;
+
+        // 🔥 Novo: salva a escala padrão do Animator para nunca ser alterada
+        private Vector3 _defaultScale;
 
         private void Awake()
         {
@@ -44,14 +45,19 @@ namespace TarodevController
             _player = GetComponentInParent<IPlayerController>();
             _rb = GetComponentInParent<Rigidbody2D>();
             _playerAttack = GetComponentInParent<PlayerAttack>();
+
+            if (_anim != null)
+            {
+                _defaultScale = _anim.transform.localScale; // escala base
+            }
         }
 
         private void OnEnable()
         {
             _player.Jumped += OnJumped;
             _player.GroundedChanged += OnGroundedChanged;
+            _player.Dashed += OnDashed;
 
-            // Conecta o evento de ataque
             if (_playerAttack != null)
             {
                 PlayerAttack.OnAttack += OnAttack;
@@ -64,8 +70,8 @@ namespace TarodevController
         {
             _player.Jumped -= OnJumped;
             _player.GroundedChanged -= OnGroundedChanged;
+            _player.Dashed -= OnDashed;
 
-            // Remove o evento de ataque
             if (_playerAttack != null)
             {
                 PlayerAttack.OnAttack -= OnAttack;
@@ -84,6 +90,21 @@ namespace TarodevController
             HandleCharacterTilt();
             CheckLandingTransition();
             HandleWallSlide();
+
+            _anim.SetFloat(SpeedKey, Mathf.Abs(_rb.linearVelocity.x));
+        }
+
+        // 🔥 Novo: corrige a escala no final do Update para evitar que o Animator mude
+        private void LateUpdate()
+        {
+            if (_anim == null) return;
+
+            // Mantém sempre a escala original, só espelha no eixo X
+            _anim.transform.localScale = new Vector3(
+                Mathf.Abs(_defaultScale.x) * (_sprite.flipX ? -1 : 1),
+                _defaultScale.y,
+                _defaultScale.z
+            );
         }
 
         private void HandleWallSlide()
@@ -96,14 +117,11 @@ namespace TarodevController
 
         private void CheckLandingTransition()
         {
-            if (_grounded) return; // N�o precisa verificar se j� est� no ch�o
-
+            if (_grounded) return;
             float currentYVelocity = _rb.linearVelocity.y;
 
-            // Detecta a transi��o de subida para descida (pico do pulo)
             if (_wasRising && currentYVelocity <= 0)
             {
-                // Come�ou a cair - dispara a anima��o de land/queda
                 OnStartFalling();
             }
 
@@ -113,9 +131,7 @@ namespace TarodevController
 
         private void OnStartFalling()
         {
-            // Dispara a anima��o de come�o de queda
             _anim.SetTrigger(FallingKey);
-            Debug.Log("Started falling - Land animation triggered");
         }
 
         private void HandleSpriteFlip()
@@ -127,36 +143,69 @@ namespace TarodevController
         {
             var inputStrength = Mathf.Abs(_player.FrameInput.x);
             _anim.SetFloat(IdleSpeedKey, Mathf.Lerp(1, _maxIdleSpeed, inputStrength));
-            _moveParticles.transform.localScale = Vector3.MoveTowards(_moveParticles.transform.localScale, Vector3.one * inputStrength, 2 * Time.deltaTime);
+            _moveParticles.transform.localScale = Vector3.MoveTowards(
+                _moveParticles.transform.localScale,
+                Vector3.one * inputStrength,
+                2 * Time.deltaTime
+            );
         }
 
         private void HandleCharacterTilt()
         {
-            var runningTilt = _grounded ? Quaternion.Euler(0, 0, _maxTilt * _player.FrameInput.x) : Quaternion.identity;
-            _anim.transform.up = Vector3.RotateTowards(_anim.transform.up, runningTilt * Vector2.up, _tiltSpeed * Time.deltaTime, 0f);
+            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Dash") ||
+                _anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            {
+                _anim.transform.up = Vector2.up;
+                return;
+            }
+
+            var runningTilt = _grounded
+                ? Quaternion.Euler(0, 0, _maxTilt * _player.FrameInput.x)
+                : Quaternion.identity;
+
+            _anim.transform.up = Vector3.RotateTowards(
+                _anim.transform.up,
+                runningTilt * Vector2.up,
+                _tiltSpeed * Time.deltaTime,
+                0f
+            );
         }
 
-        // Novo m�todo para lidar com anima��o de ataque
+        private void OnDashed()
+        {
+            _anim.SetTrigger(DashKey);
+
+            if (_dashParticles != null)
+            {
+                SetColor(_dashParticles);
+                _dashParticles.Play();
+            }
+
+            if (_dashSound != null)
+            {
+                _source.PlayOneShot(_dashSound);
+            }
+        }
+
         private void OnAttack()
         {
             _anim.SetTrigger(AttackKey);
-            Debug.Log("Attack animation triggered");
         }
 
         private void OnJumped()
         {
             _anim.SetTrigger(JumpKey);
             _anim.ResetTrigger(GroundedKey);
-            _anim.ResetTrigger(FallingKey); // Reseta o trigger de queda ao pular
+            _anim.ResetTrigger(FallingKey);
 
-            if (_grounded) // Avoid coyote
+            if (_grounded)
             {
                 SetColor(_jumpParticles);
                 SetColor(_launchParticles);
                 _jumpParticles.Play();
             }
 
-            _wasRising = true; // Come�ou a subir
+            _wasRising = true;
         }
 
         private void OnGroundedChanged(bool grounded, float impact)
@@ -169,15 +218,16 @@ namespace TarodevController
                 SetColor(_landParticles);
 
                 _anim.SetTrigger(GroundedKey);
-                _anim.ResetTrigger(FallingKey); // Reseta a anima��o de queda ao tocar o ch�o
+                _anim.ResetTrigger(FallingKey);
 
                 _source.PlayOneShot(_footsteps[Random.Range(0, _footsteps.Length)]);
                 _moveParticles.Play();
 
-                _landParticles.transform.localScale = Vector3.one * Mathf.InverseLerp(0, 40, impact);
+                _landParticles.transform.localScale =
+                    Vector3.one * Mathf.InverseLerp(0, 40, impact);
                 _landParticles.Play();
 
-                _wasRising = false; // Reset ao tocar o ch�o
+                _wasRising = false;
             }
             else
             {
@@ -190,6 +240,7 @@ namespace TarodevController
             var hit = Physics2D.Raycast(transform.position, Vector3.down, 2);
 
             if (!hit || hit.collider.isTrigger || !hit.transform.TryGetComponent(out SpriteRenderer r)) return;
+
             var color = r.color;
             _currentGradient = new ParticleSystem.MinMaxGradient(color * 0.9f, color * 1.2f);
             SetColor(_moveParticles);
@@ -201,12 +252,14 @@ namespace TarodevController
             main.startColor = _currentGradient;
         }
 
-        // Chaves do Animator
+        // Animator Keys
         private static readonly int GroundedKey = Animator.StringToHash("Grounded");
         private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int FallingKey = Animator.StringToHash("Falling");
         private static readonly int WallSlideKey = Animator.StringToHash("WallSlide");
         private static readonly int AttackKey = Animator.StringToHash("Attack");
+        private static readonly int DashKey = Animator.StringToHash("Dash");
+        private static readonly int SpeedKey = Animator.StringToHash("Speed");
     }
 }

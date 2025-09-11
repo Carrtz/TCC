@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class OpenDoor : MonoBehaviour
 {
     public float interactionDistance = 2f; // Dist�ncia m�xima para interagir com a porta
-    public KeyCode interactionKey = KeyCode.G; // Tecla para interagir
+    public KeyCode interactionKey = KeyCode.E; // Tecla para interagir
 
     private Transform player;
     private TimerManager timer; // Refer�ncia para o script Timer
