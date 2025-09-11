@@ -19,9 +19,9 @@ MonoBehaviour:
   VerticalDeadZoneThreshold: 0.3
   HorizontalDeadZoneThreshold: 0.1
   MaxSpeed: 14
-  Acceleration: 120
-  GroundDeceleration: 60
-  AirDeceleration: 30
+  Acceleration: 80
+  GroundDeceleration: 300
+  AirDeceleration: 100
   GroundingForce: -1.5
   GrounderDistance: 0.05
   JumpPower: 36
@@ -33,4 +33,15 @@ MonoBehaviour:
   WallJumpHorizontalForce: 30
   WallJumpVerticalForce: 25
   WallJumpCooldown: 0.22
-  WallSlideSpeed: 2.99
+  WallSlideSpeed: 3
+  CanParry: 1
+  ParryCooldown: 1
+  ParryDuration: 0.3
+  ParryRange: 1.5
+  ParryableLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  InvincibleDuringParry: 1
+  DashSpeed: 25
+  DashDuration: 0.2
+  DashCooldown: 1

@@ -9,22 +9,22 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject hitEffect;
 
     private int currentHealth;
-    private Animator animator; // Referência ao Animator do inimigo
-    private bool isHit = false; // Flag para verificar se o inimigo está sendo atingido
+    private Animator animator; // Referï¿½ncia ao Animator do inimigo
+    private bool isHit = false; // Flag para verificar se o inimigo estï¿½ sendo atingido
 
     private void Start()
     {
         currentHealth = maxHealth;
-        animator = GetComponent<Animator>(); // Obtém o Animator do inimigo
+        animator = GetComponent<Animator>(); // Obtï¿½m o Animator do inimigo
     }
 
     public void TakeDamage(int damage)
     {
-        // Verifica se o inimigo já está sendo atingido (não pode ser atingido enquanto na animação de dano)
+        // Verifica se o inimigo jï¿½ estï¿½ sendo atingido (nï¿½o pode ser atingido enquanto na animaï¿½ï¿½o de dano)
         if (isHit)
             return;
 
-        // Marca o inimigo como "sendo atingido" e inicia a animação de dano
+        // Marca o inimigo como "sendo atingido" e inicia a animaï¿½ï¿½o de dano
         isHit = true;
 
         currentHealth -= damage;
@@ -35,13 +35,13 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(hitEffect, transform.position, Quaternion.identity);
         }
 
-        // Aciona a animação de dano
+        // Aciona a animaï¿½ï¿½o de dano
         if (animator != null && currentHealth > 0)
         {
             animator.SetTrigger("Damaged"); // Aciona o Trigger "Damaged"
         }
 
-        // Inicia a corrotina que vai liberar o inimigo para receber dano novamente após a animação
+        // Inicia a corrotina que vai liberar o inimigo para receber dano novamente apï¿½s a animaï¿½ï¿½o
         if (currentHealth > 0)
         {
             StartCoroutine(ResetHitStateAfterAnimation());
@@ -54,8 +54,8 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator ResetHitStateAfterAnimation()
     {
-        // Espera o tempo da animação de hit (ajuste o tempo conforme sua animação)
-        yield return new WaitForSeconds(1f); // Por exemplo, 1 segundo de animação
+        // Espera o tempo da animaï¿½ï¿½o de hit (ajuste o tempo conforme sua animaï¿½ï¿½o)
+        yield return new WaitForSeconds(0.3f);
 
         // Libera o inimigo para receber dano novamente
         isHit = false;
@@ -68,10 +68,10 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
 
-        // Aciona a animação de morte (se você tiver)
+        // Aciona a animaï¿½ï¿½o de morte (se vocï¿½ tiver)
         if (animator != null)
         {
-            animator.SetTrigger("Die"); // Aqui você pode ter um trigger de "Die", se desejar.
+            animator.SetTrigger("Die"); // Aqui vocï¿½ pode ter um trigger de "Die", se desejar.
         }
 
         Destroy(gameObject); // Destroi o inimigo
@@ -79,7 +79,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Barra de saúde visual
+        // Barra de saï¿½de visual
         float healthPercent = (float)currentHealth / maxHealth;
         Vector3 barPosition = transform.position + Vector3.up * 1f;
 

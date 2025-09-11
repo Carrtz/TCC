@@ -73,7 +73,7 @@ namespace TarodevController
         [Tooltip("Velocidade aplicada durante o dash")]
         public float DashSpeed = 25f;
 
-        [Tooltip("Duração do dash em segundos")]
+        [Tooltip("Duraï¿½ï¿½o do dash em segundos")]
         public float DashDuration = 0.2f;
 
         [Tooltip("Tempo de recarga do dash em segundos")]

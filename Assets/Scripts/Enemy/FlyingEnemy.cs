@@ -10,10 +10,11 @@ public class FlyingEnemy : MonoBehaviour
     [Header("Knockback Settings")]
     public float knockbackForce = 8f;
     public float knockbackDuration = 0.5f;
-    public float knockbackDecay = 0.7f;
+    public LayerMask wallLayer = 1 << 7;
 
     private GameObject player;
     private Rigidbody2D rb;
+    private WallCollisionHandler wallCollisionHandler;
     private bool isKnockedBack = false;
     private float knockbackTimer = 0f;
     private Vector2 knockbackDirection;
@@ -23,23 +24,23 @@ public class FlyingEnemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+        
+        wallCollisionHandler = gameObject.AddComponent<WallCollisionHandler>();
+        wallCollisionHandler.wallLayer = wallLayer;
     }
 
     void Update()
     {
         if (player == null) return;
-
         HandleKnockback();
         
-        if (!isKnockedBack)
+        if (!isKnockedBack && !wallCollisionHandler.IsAgainstWall())
         {
             if (chase)
                 Chase();
             else
                 ReturnEnemy();
         }
-
-        Flip();
     }
 
     void HandleKnockback()
@@ -47,37 +48,45 @@ public class FlyingEnemy : MonoBehaviour
         if (isKnockedBack)
         {
             knockbackTimer -= Time.deltaTime;
+            
+            // Para knockback se atingir parede
+            if (wallCollisionHandler.IsAgainstWall())
+            {
+                isKnockedBack = false;
+                knockbackTimer = 0f;
+                rb.linearVelocity = Vector2.zero;
+                return;
+            }
+
             if (knockbackTimer <= 0f)
             {
                 isKnockedBack = false;
-                rb.linearVelocity = movementDirection * speed;
             }
             else
             {
-                float decayFactor = Mathf.Pow(knockbackDecay, Time.deltaTime * 10f);
                 rb.linearVelocity = knockbackDirection * knockbackForce * (knockbackTimer / knockbackDuration);
             }
         }
     }
 
-    private void ReturnEnemy()
-    {
-        movementDirection = (startingPoint.position - transform.position).normalized;
-        rb.linearVelocity = movementDirection * speed;
-    }
+private void ReturnEnemy()
+{
+    float distanceToStart = Vector2.Distance(transform.position, startingPoint.position);
+    
+    if (distanceToStart < 0.3f)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+    
+    movementDirection = (startingPoint.position - transform.position).normalized;
+    rb.linearVelocity = movementDirection * speed;
+}
 
     private void Chase()
     {
         movementDirection = (player.transform.position - transform.position).normalized;
         rb.linearVelocity = movementDirection * speed;
-    }
-
-    private void Flip()
-    {
-        if (player != null && transform.position.x > player.transform.position.x)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else
-            transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
