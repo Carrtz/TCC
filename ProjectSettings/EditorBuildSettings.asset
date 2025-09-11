@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 3813fa331ad06d3488fe4ece37f89771
+  - enabled: 1
+    path: Assets/Scenes/Ranking.unity
+    guid: bce4ab6435564be4881985113015df8b
   - enabled: 0
     path: Assets/Scenes/(OLD) TutorialFinal.unity
     guid: 99c9720ab356a0642a771bea13969a05
