@@ -1629,7 +1629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &271535691
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1858,6 +1858,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerPushForce: 10
+  pushCheckDistance: 0.5
 --- !u!114 &299875759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2818,6 +2820,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerPushForce: 10
+  pushCheckDistance: 0.5
 --- !u!114 &387338465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3992,7 +3996,6 @@ GameObject:
   - component: {fileID: 554665412}
   - component: {fileID: 554665415}
   - component: {fileID: 554665414}
-  - component: {fileID: 554665413}
   m_Layer: 0
   m_Name: TextProximity (5)
   m_TagString: Untagged
@@ -4015,21 +4018,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 855763912}
   m_LocalEulerAnglesHint: {x: 0, y: -0.21, z: 0}
---- !u!114 &554665413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554665411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1eac9351c685b043be788e56a741112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TextProximity
-  Area: {fileID: 554665412}
-  Text: {fileID: 936775692}
-  fadeDuration: 1
 --- !u!114 &554665414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4043,7 +4031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextProximity
   Area: {fileID: 554665412}
-  Text: {fileID: 1495012516}
+  Text: {fileID: 324182864}
   fadeDuration: 1
 --- !u!61 &554665415
 BoxCollider2D:
@@ -7338,7 +7326,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -9275,6 +9263,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerPushForce: 10
+  pushCheckDistance: 0.5
 --- !u!114 &1287057468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9757,6 +9747,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerPushForce: 10
+  pushCheckDistance: 0.5
 --- !u!114 &1377400977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89169,6 +89161,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  playerPushForce: 10
+  pushCheckDistance: 0.5
 --- !u!114 &1568983801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91339,7 +91333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2135499235
 RectTransform:
   m_ObjectHideFlags: 0

@@ -16,11 +16,12 @@ public class UI : MonoBehaviour
 
     private void OnButtonPlay()
     {
-        SceneManager.LoadScene("TutorialFinal");
+        SceneManager.LoadScene("Animation");
     }
     private void OnButtonOptions()
     {
-        SceneManager.LoadScene("Ranking");
+        print("ta funcionando");
+        //SceneManager.LoadScene("Ranking");
     }
     private void OnButtonExit()
     {
