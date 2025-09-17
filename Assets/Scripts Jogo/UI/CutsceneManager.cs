@@ -213,7 +213,6 @@ public class CutsceneManager : MonoBehaviour
         if (cutsceneImages != null && cutsceneImages.Length > 0 && displayImage != null)
         {
             displayImage.sprite = cutsceneImages[0];
-            displayImage.color = new Color(1, 1, 1, 1);
             UpdateUI();
         }
         else
@@ -313,12 +312,10 @@ public class CutsceneManager : MonoBehaviour
         while (elapsedTime < fadeDuration)
         {
             float alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
-            displayImage.color = new Color(1, 1, 1, alpha);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        displayImage.color = new Color(1, 1, 1, 1);
     }
 
     IEnumerator FadeOut()
@@ -330,12 +327,10 @@ public class CutsceneManager : MonoBehaviour
         while (elapsedTime < fadeDuration)
         {
             float alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration);
-            displayImage.color = new Color(1, 1, 1, alpha);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        displayImage.color = new Color(1, 1, 1, 0);
     }
 
     void UpdateUI()
