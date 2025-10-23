@@ -11,6 +11,7 @@ TagManager:
   - OpenDoor
   - Item
   - chao
+  - MeioDaCamera
   layers:
   - Default
   - TransparentFX

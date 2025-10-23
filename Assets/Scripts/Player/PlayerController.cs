@@ -99,7 +99,7 @@ namespace TarodevController
             GatherInput();
             CheckForItems();
             Flip();
-            if (Mathf.Abs(transform.position.x - npc.position.x) < 2.0f)
+            if (npc.transform != null && Mathf.Abs(transform.position.x - npc.position.x) < 2.0f)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
