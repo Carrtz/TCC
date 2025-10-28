@@ -8,20 +8,20 @@ public class MoveCamera : MonoBehaviour
     [SerializeField] private Transform alvoSecundario;
     
     [Header("Configurações Gerais")]
-    [SerializeField] private Vector3 offset = new Vector3(0, 2, -5);
-    [SerializeField] private float distanciaMinima = 0.1f;
+    [SerializeField] private Vector3 offset = new Vector3(0, 0, 0);
+    [SerializeField] private float distanciaMinima = 0.05f;
     
     [Header("Suavização - Principal → Secundário")]
-    [SerializeField] private float velocidadeParaSecundario = 8f;
+    [SerializeField] private float velocidadeParaSecundario = 5f;
     
     [Header("Suavização - Secundário → Principal")]
-    [SerializeField] private float velocidadeParaPrincipal = 3f;
+    [SerializeField] private float velocidadeParaPrincipal = 15f;
     
     [Header("Configurações Orthographic Size")]
     [SerializeField] private float tamanhoNormal = 5f;
-    [SerializeField] private float tamanhoZoom = 8f;
+    [SerializeField] private float tamanhoZoom = 6.5f;
     [SerializeField] private float velocidadeZoomParaSecundario = 3f;
-    [SerializeField] private float velocidadeZoomParaPrincipal = 2f;
+    [SerializeField] private float velocidadeZoomParaPrincipal = 5f;
     
     private Transform alvoAtual;
     private bool emTransicao = false;
