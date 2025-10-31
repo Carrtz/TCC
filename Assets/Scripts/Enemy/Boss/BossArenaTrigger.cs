@@ -25,7 +25,6 @@ public class BossArenaTrigger : MonoBehaviour
             }
 
             Debug.Log("Player entrou na arena! Luta iniciada.");
-            GetComponent<Collider2D>().enabled = false;
         }
     }
 }

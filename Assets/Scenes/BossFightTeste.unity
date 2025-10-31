@@ -239,6 +239,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 563761917}
   - {fileID: 909695006}
   - {fileID: 1531678999}
   - {fileID: 1863822453}
@@ -683,11 +684,11 @@ Transform:
   m_GameObject: {fileID: 563761916}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.599998, y: -70.02, z: 0}
+  m_LocalPosition: {x: -0.1344986, y: -0.5121994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 69874098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &583579967
 PrefabInstance:
@@ -8765,7 +8766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossArenaTrigger
   bossController: {fileID: 1850672224}
-  arenaWalls: {fileID: 0}
+  arenaWalls: {fileID: 909695003}
 --- !u!1 &938334906
 GameObject:
   m_ObjectHideFlags: 0
@@ -9344,7 +9345,7 @@ MonoBehaviour:
   idleDuration: 1
   attackWindup: 1
   shortRestDuration: 2
-  longRestDuration: 6
+  longRestDuration: 4
 --- !u!1 &1863822452
 GameObject:
   m_ObjectHideFlags: 0
@@ -9627,7 +9628,6 @@ SceneRoots:
   - {fileID: 1886581826}
   - {fileID: 354198178}
   - {fileID: 306284316}
-  - {fileID: 563761917}
   - {fileID: 740732422}
   - {fileID: 199093408}
   - {fileID: 98457421}
