@@ -12,6 +12,7 @@ TagManager:
   - Item
   - chao
   - MeioDaCamera
+  - Boss
   layers:
   - Default
   - TransparentFX

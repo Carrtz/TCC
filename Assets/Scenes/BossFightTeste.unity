@@ -9127,7 +9127,7 @@ Transform:
   m_GameObject: {fileID: 1531678998}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: -3.87, z: 0}
+  m_LocalPosition: {x: -10, y: -3.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9221,7 +9221,7 @@ Transform:
   m_GameObject: {fileID: 1850672217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.902, y: -73.243, z: 0}
+  m_LocalPosition: {x: -17.902, y: -73.49, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -9325,27 +9325,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7578d0fe495a06d4ca1707deff168a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossController
-  moveSpeed: 5
-  dashSpeed: 15
-  diveSpeed: 20
-  health: 30
   player: {fileID: 297761243}
   arenaBounds: {fileID: 909695005}
-  leftExtreme: {fileID: 1531678999}
-  rightExtreme: {fileID: 1863822453}
-  shockwavePrefab: {fileID: 7889647873593723005, guid: e470d4e6f01a43c45b2c68e082f82695, type: 3}
-  bulletPrefab: {fileID: 7889647873593723005, guid: e470d4e6f01a43c45b2c68e082f82695, type: 3}
+  leftShootPosition: {fileID: 1531678999}
+  rightShootPosition: {fileID: 1863822453}
   introSprite: {fileID: -9095717837082945937, guid: 980fe827f3bbdca4e9199f180fb482f8, type: 3}
   idleSprite: {fileID: -9095717837082945937, guid: a38bf7840300b8c4e9ee755d8f653d95, type: 3}
   dashSprite: {fileID: -9095717837082945937, guid: eca2433ac190d7a4caeb55b265d1af00, type: 3}
   diveSprite: {fileID: -9095717837082945937, guid: 7a3323167d78f894bbe1f73a1813be99, type: 3}
   shootSprite: {fileID: -9095717837082945937, guid: 55551f7d699953a4aadf91f06d6584f7, type: 3}
   restSprite: {fileID: -9095717837082945937, guid: 9466cc27abccae841bf647d821745fb2, type: 3}
-  introDuration: 5
-  idleDuration: 1
-  attackWindup: 1
-  shortRestDuration: 2
-  longRestDuration: 4
+  shockwavePrefab: {fileID: 7889647873593723005, guid: e470d4e6f01a43c45b2c68e082f82695, type: 3}
+  projectilePrefab: {fileID: 7889647873593723005, guid: e470d4e6f01a43c45b2c68e082f82695, type: 3}
+  dashSpeed: 20
+  diveSpeed: 20
+  projectileSpeed: 20
+  diveDistance: 5
+  introDuration: 3
+  shortRestDuration: 1
+  longRestDuration: 2
+  attackDelay: 1
+  betweenShotsDelay: 0.5
 --- !u!1 &1863822452
 GameObject:
   m_ObjectHideFlags: 0
@@ -9371,7 +9371,7 @@ Transform:
   m_GameObject: {fileID: 1863822452}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: -3.8699996, z: 0}
+  m_LocalPosition: {x: 10, y: -3.919995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
