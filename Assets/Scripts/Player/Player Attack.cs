@@ -1,7 +1,6 @@
 using TarodevController;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -50,35 +49,47 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("Player is attacking!");
         OnAttack?.Invoke();
 
-        Collider2D[] hitObjects = Physics2D.OverlapBoxAll(
-            attackPoint.position, attackRange, 0, enemyLayer);
+        Collider2D[] hitObjects = Physics2D.OverlapBoxAll(attackPoint.position, attackRange, 0);
 
         foreach (Collider2D hit in hitObjects)
         {
-            TryDamageBoss(hit);
-
-            EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
-            FlyingEnemy flyingEnemy = hit.GetComponent<FlyingEnemy>();
-            Enemy enemy = hit.GetComponent<Enemy>();
-
-            if (enemyHealth != null)
+            if (((1 << hit.gameObject.layer) & enemyLayer) != 0 && hit.CompareTag("Boss"))
             {
-                enemyHealth.TakeDamage(attackDamage);
-                Debug.Log($"Hit enemy: {hit.name}");
-
-                Vector2 knockbackDir = (hit.transform.position - transform.position).normalized;
-                
-                if (flyingEnemy != null)
+                BossHealth bossHealth = hit.GetComponent<BossHealth>();
+                if (bossHealth != null)
                 {
-                    flyingEnemy.ApplyKnockback(knockbackDir);
-                }
-                
-                if (enemy != null)
-                {
-                    enemy.ApplyKnockback(knockbackDir);
+                    bossHealth.TakeDamage(attackDamage);
+                    continue;
                 }
             }
 
+            // DEPOIS verifica inimigos normais (layer enemy mas NÃO é boss)
+            if (((1 << hit.gameObject.layer) & enemyLayer) != 0 && !hit.CompareTag("Boss"))
+            {
+                EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
+                FlyingEnemy flyingEnemy = hit.GetComponent<FlyingEnemy>();
+                Enemy enemy = hit.GetComponent<Enemy>();
+
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(attackDamage);
+                    Debug.Log($"Hit enemy: {hit.name}");
+
+                    Vector2 knockbackDir = (hit.transform.position - transform.position).normalized;
+
+                    if (flyingEnemy != null)
+                    {
+                        flyingEnemy.ApplyKnockback(knockbackDir);
+                    }
+
+                    if (enemy != null)
+                    {
+                        enemy.ApplyKnockback(knockbackDir);
+                    }
+                }
+            }
+
+            // Objetos quebráveis
             if (((1 << hit.gameObject.layer) & breakableLayer) != 0)
             {
                 BreakableWall wall = hit.GetComponent<BreakableWall>();
@@ -88,16 +99,6 @@ public class PlayerAttack : MonoBehaviour
                     Debug.Log($"Hit breakable wall: {hit.name}");
                 }
             }
-        }
-    }
-
-    private void TryDamageBoss(Collider2D colliderHit)
-    {
-        BossHealth bossHealth = colliderHit.GetComponent<BossHealth>();
-
-        if (bossHealth != null)
-        {
-            bossHealth.TakeDamage(1);
         }
     }
 

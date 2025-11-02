@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour
     public BoxCollider2D arenaBounds;
     public Transform leftShootPosition;
     public Transform rightShootPosition;
+    public PlayerHealth playerHealth;
     
     [Header("Componentes")]
     public Animator bossAnimator;
@@ -29,7 +30,7 @@ public class BossController : MonoBehaviour
     public float groundCheckTolerance = 0.05f;
     public float wallCheckTolerance = 0.05f;
     public float movementStopThreshold = 0.1f;
-    
+
     [Header("Configurações do Dash Attack")]
     public float dashSpeed = 15f;
     public float dashAttackSpawnDistance = 2f;
@@ -47,6 +48,10 @@ public class BossController : MonoBehaviour
     public float shootAttackWarningTime = 0.5f;
     public int shootAttackProjectileCount = 3;
     public float shootAttackBetweenShotsDelay = 0.5f;
+
+    [Header("Configurações de Dano")]
+    public int damageAmount = 1;
+    public float damageCooldown = 1f;
 
     private readonly int animIntro = Animator.StringToHash("Intro");
     private readonly int animIdle = Animator.StringToHash("Idle");
@@ -73,6 +78,7 @@ public class BossController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 introPosition;
     private Collider2D bossCollider;
+    private bool canDamage = true;
 
     void Awake()
     {
@@ -89,6 +95,32 @@ public class BossController : MonoBehaviour
         currentState = BossState.Idle;
         introPosition = transform.position;
         SetAnimation(animIdle);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandlePlayerDamage(collision.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        HandlePlayerDamage(other.gameObject);
+    }
+
+    void HandlePlayerDamage(GameObject otherObject)
+    {
+        if (canDamage && playerHealth != null && otherObject.CompareTag("Player"))
+        {
+            playerHealth.TakeDamage(damageAmount);
+            StartCoroutine(DamageCooldownRoutine());
+        }
+    }
+
+    IEnumerator DamageCooldownRoutine()
+    {
+        canDamage = false;
+        yield return new WaitForSeconds(damageCooldown);
+        canDamage = true;
     }
 
     public void StartBossFight()
@@ -112,24 +144,15 @@ public class BossController : MonoBehaviour
 
     IEnumerator DeathRoutine()
     {
-        // Para qualquer movimento
         rb.linearVelocity = Vector2.zero;
         if (rb != null)
         {
             rb.isKinematic = true;
         }
 
-        // Toca animação de morte
         SetAnimation(animDeath);
         
-        // Espera a animação de morte (5 segundos)
         yield return new WaitForSeconds(5f);
-        
-        // Aqui você pode adicionar lógica adicional:
-        // - Destruir o objeto
-        // - Tocar efeitos sonoros
-        // - Mostrar tela de vitória
-        // - etc.
         
         Debug.Log("Boss morreu!");
         Destroy(gameObject);
@@ -159,7 +182,7 @@ public class BossController : MonoBehaviour
             SetAnimation(animIdle);
             rb.linearVelocity = Vector2.zero;
             
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             
             yield return StartCoroutine(ExecuteRandomAttack());
             consecutiveAttacks++;
@@ -467,7 +490,7 @@ public class BossController : MonoBehaviour
             bossAnimator.SetBool(animShooting, false);
             bossAnimator.SetBool(animShootEnd, false);
             bossAnimator.SetBool(animDeath, false);
-            
+
             bossAnimator.SetBool(animationHash, true);
         }
     }

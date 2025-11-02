@@ -392,6 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   invincibilityTime: 1
+  blinkInterval: 0.1
+  spriteRenderer: {fileID: 586048366}
 --- !u!4 &297761243 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4855596731407334206, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
@@ -879,6 +881,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3987301587371192189, guid: a65168d7afaeea24fb33baf05e1d1917, type: 3}
     - target: {fileID: 9167367220621938362, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167367220621938362, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -941,6 +947,11 @@ PrefabInstance:
       insertIndex: 5
       addedObject: {fileID: 297761237}
   m_SourcePrefab: {fileID: 100100000, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+--- !u!212 &586048366 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9167367220621938362, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+  m_PrefabInstance: {fileID: 583579967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &636397970
 GameObject:
   m_ObjectHideFlags: 0
@@ -9338,13 +9349,14 @@ MonoBehaviour:
   arenaBounds: {fileID: 909695005}
   leftShootPosition: {fileID: 1531678999}
   rightShootPosition: {fileID: 1863822453}
+  playerHealth: {fileID: 297761237}
   bossAnimator: {fileID: 1850672222}
   shockwavePrefab: {fileID: 7889647873593723005, guid: 2f3f1fca134d3254f8ae87ededea5491, type: 3}
   projectilePrefab: {fileID: 7889647873593723005, guid: e470d4e6f01a43c45b2c68e082f82695, type: 3}
   projectileSpeed: 20
   introDuration: 3
-  shortRestDuration: 1
-  longRestDuration: 2
+  shortRestDuration: 0
+  longRestDuration: 0.5
   attackDelay: 1
   groundCheckTolerance: 0.05
   wallCheckTolerance: 0.05
@@ -9361,6 +9373,8 @@ MonoBehaviour:
   shootAttackWarningTime: 0.5
   shootAttackProjectileCount: 3
   shootAttackBetweenShotsDelay: 0.5
+  damageAmount: 1
+  damageCooldown: 1
 --- !u!114 &1850672225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9373,8 +9387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d125544042c6ff43bc02c85515047a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
-  maxHealth: 10
-  invincibilityTime: 1
+  maxHealth: 50
+  invincibilityTime: 0
   bossController: {fileID: 1850672224}
 --- !u!1 &1863822452
 GameObject:

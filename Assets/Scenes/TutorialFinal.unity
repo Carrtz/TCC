@@ -1989,6 +1989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   invincibilityTime: 1
+  blinkInterval: 0.1
+  spriteRenderer: {fileID: 463677906}
 --- !u!4 &297761243 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4855596731407334206, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
@@ -3267,6 +3269,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404443009}
   m_Mesh: {fileID: -3329902420748629119, guid: d86a94e2920fe8c4db59c0883eca1dcd, type: 3}
+--- !u!212 &463677906 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9167367220621938362, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+  m_PrefabInstance: {fileID: 583579967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &481520946
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using System.Collections;
 public class BossHealth : MonoBehaviour
 {
     [Header("Configurações de Vida")]
-    public int maxHealth = 100;
+    public int maxHealth = 50;
     public float invincibilityTime = 1f;
     
     [Header("Referências")]
@@ -21,7 +21,7 @@ public class BossHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("tomou daninho otário");
+        Debug.Log("O boss levou dano e está com " + currentHealth + " de vida.");
         if (isDead || isInvincible) return;
         
         currentHealth -= damage;
