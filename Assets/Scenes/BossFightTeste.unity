@@ -715,6 +715,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4267765479729465080, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+      propertyPath: specialObject
+      value: 
+      objectReference: {fileID: 1850672217}
+    - target: {fileID: 4267765479729465080, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
@@ -734,6 +738,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: a081f785d315a2b43966f129ce852878, type: 2}
+    - target: {fileID: 4855596731407334204, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4855596731407334205, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
       propertyPath: npc
       value: 
@@ -8687,7 +8695,7 @@ GameObject:
   - component: {fileID: 909695007}
   m_Layer: 0
   m_Name: AreaBossArena
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9147,9 +9155,10 @@ GameObject:
   - component: {fileID: 1850672221}
   - component: {fileID: 1850672223}
   - component: {fileID: 1850672224}
-  m_Layer: 0
+  - component: {fileID: 1850672225}
+  m_Layer: 6
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9235,8 +9244,8 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850672217}
-  m_BodyType: 0
-  m_Simulated: 0
+  m_BodyType: 1
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -9306,7 +9315,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -9329,23 +9338,44 @@ MonoBehaviour:
   arenaBounds: {fileID: 909695005}
   leftShootPosition: {fileID: 1531678999}
   rightShootPosition: {fileID: 1863822453}
-  introSprite: {fileID: -9095717837082945937, guid: 980fe827f3bbdca4e9199f180fb482f8, type: 3}
-  idleSprite: {fileID: -9095717837082945937, guid: a38bf7840300b8c4e9ee755d8f653d95, type: 3}
-  dashSprite: {fileID: -9095717837082945937, guid: eca2433ac190d7a4caeb55b265d1af00, type: 3}
-  diveSprite: {fileID: -9095717837082945937, guid: 7a3323167d78f894bbe1f73a1813be99, type: 3}
-  shootSprite: {fileID: -9095717837082945937, guid: 55551f7d699953a4aadf91f06d6584f7, type: 3}
-  restSprite: {fileID: -9095717837082945937, guid: 9466cc27abccae841bf647d821745fb2, type: 3}
-  shockwavePrefab: {fileID: 7889647873593723005, guid: e470d4e6f01a43c45b2c68e082f82695, type: 3}
+  bossAnimator: {fileID: 1850672222}
+  shockwavePrefab: {fileID: 7889647873593723005, guid: 2f3f1fca134d3254f8ae87ededea5491, type: 3}
   projectilePrefab: {fileID: 7889647873593723005, guid: e470d4e6f01a43c45b2c68e082f82695, type: 3}
-  dashSpeed: 20
-  diveSpeed: 20
   projectileSpeed: 20
-  diveDistance: 5
   introDuration: 3
   shortRestDuration: 1
   longRestDuration: 2
   attackDelay: 1
-  betweenShotsDelay: 0.5
+  groundCheckTolerance: 0.05
+  wallCheckTolerance: 0.05
+  movementStopThreshold: 0.1
+  dashSpeed: 20
+  dashAttackSpawnDistance: 2
+  dashAttackAimTime: 0.8
+  dashAttackDuration: 1
+  dashAttackWallPause: 0.1
+  diveSpeed: 20
+  diveDistance: 5
+  diveAttackFollowTime: 1
+  diveAttackPostShockwavePause: 0.5
+  shootAttackWarningTime: 0.5
+  shootAttackProjectileCount: 3
+  shootAttackBetweenShotsDelay: 0.5
+--- !u!114 &1850672225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850672217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d125544042c6ff43bc02c85515047a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealth
+  maxHealth: 10
+  invincibilityTime: 1
+  bossController: {fileID: 1850672224}
 --- !u!1 &1863822452
 GameObject:
   m_ObjectHideFlags: 0
@@ -9527,7 +9557,7 @@ Transform:
   m_GameObject: {fileID: 2061261661}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00399971, y: 0.15699983, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -23,8 +23,6 @@ public class BossArenaTrigger : MonoBehaviour
             {
                 arenaWalls.SetActive(true);
             }
-
-            Debug.Log("Player entrou na arena! Luta iniciada.");
         }
     }
 }

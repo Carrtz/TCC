@@ -50,13 +50,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Método para definir invencibilidade externamente
     public void SetInvincible(bool invincible)
     {
         isInvincible = invincible;
         if (invincible)
         {
-            invincibilityTimer = float.MaxValue; // Timer muito longo
+            invincibilityTimer = float.MaxValue;
         }
         else
         {
@@ -90,5 +89,4 @@ public class PlayerHealth : MonoBehaviour
     {
         return currentHealth;
     }
-
 }

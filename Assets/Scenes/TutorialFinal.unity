@@ -4247,6 +4247,99 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0e16b5c523ad4124f93289767302f8b5, type: 3}
   m_PrefabInstance: {fileID: 605351600}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &574224144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 574224147}
+  - component: {fileID: 574224146}
+  - component: {fileID: 574224145}
+  m_Layer: 0
+  m_Name: AreaKey
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &574224145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574224144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3bc37c9d1925fb4e98ef2260a1972e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossArenaTrigger
+  bossController: {fileID: 0}
+  arenaWalls: {fileID: 574224144}
+--- !u!61 &574224146
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574224144}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &574224147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574224144}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.52, y: -11.6, z: 0}
+  m_LocalScale: {x: 32.40169, y: 19.501125, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574589865
 GameObject:
   m_ObjectHideFlags: 0
@@ -90792,13 +90885,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveCamera
   alvoPrincipal: {fileID: 2045392296}
-  alvoSecundario: {fileID: 0}
+  alvoSecundario: {fileID: 574224147}
   offset: {x: 0, y: 0, z: 0}
   distanciaMinima: 0.1
   velocidadeParaSecundario: 5
   velocidadeParaPrincipal: 15
   tamanhoNormal: 5
-  tamanhoZoom: 6.5
+  tamanhoZoom: 10
   velocidadeZoomParaSecundario: 3
   velocidadeZoomParaPrincipal: 5
 --- !u!4 &1858490064
@@ -91641,7 +91734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c46868d96419646951d44528e66080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerDetector
-  targetObject: {fileID: 0}
+  targetObject: {fileID: 574224144}
   targetTag: 
   isTouching: 0
 --- !u!50 &2045392298
@@ -92050,3 +92143,4 @@ SceneRoots:
   - {fileID: 374806574}
   - {fileID: 1384649388}
   - {fileID: 1275047459}
+  - {fileID: 574224147}

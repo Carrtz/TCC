@@ -1,6 +1,7 @@
 using TarodevController;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -49,33 +50,32 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("Player is attacking!");
         OnAttack?.Invoke();
 
-        Collider2D[] hitObjects = Physics2D.OverlapBoxAll(attackPoint.position, attackRange, 0);
+        Collider2D[] hitObjects = Physics2D.OverlapBoxAll(
+            attackPoint.position, attackRange, 0, enemyLayer);
 
         foreach (Collider2D hit in hitObjects)
         {
-            if (((1 << hit.gameObject.layer) & enemyLayer) != 0)
+            TryDamageBoss(hit);
+
+            EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
+            FlyingEnemy flyingEnemy = hit.GetComponent<FlyingEnemy>();
+            Enemy enemy = hit.GetComponent<Enemy>();
+
+            if (enemyHealth != null)
             {
-                EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth>();
-                FlyingEnemy flyingEnemy = hit.GetComponent<FlyingEnemy>();
-                Enemy enemy = hit.GetComponent<Enemy>(); // Adicionado suporte para o inimigo terrestre
+                enemyHealth.TakeDamage(attackDamage);
+                Debug.Log($"Hit enemy: {hit.name}");
 
-                if (enemyHealth != null)
+                Vector2 knockbackDir = (hit.transform.position - transform.position).normalized;
+                
+                if (flyingEnemy != null)
                 {
-                    enemyHealth.TakeDamage(attackDamage);
-                    Debug.Log($"Hit enemy: {hit.name}");
-
-                    Vector2 knockbackDir = (hit.transform.position - transform.position).normalized;
-                    
-                    // Aplica knockback em ambos os tipos de inimigo
-                    if (flyingEnemy != null)
-                    {
-                        flyingEnemy.ApplyKnockback(knockbackDir);
-                    }
-                    
-                    if (enemy != null)
-                    {
-                        enemy.ApplyKnockback(knockbackDir);
-                    }
+                    flyingEnemy.ApplyKnockback(knockbackDir);
+                }
+                
+                if (enemy != null)
+                {
+                    enemy.ApplyKnockback(knockbackDir);
                 }
             }
 
@@ -88,6 +88,16 @@ public class PlayerAttack : MonoBehaviour
                     Debug.Log($"Hit breakable wall: {hit.name}");
                 }
             }
+        }
+    }
+
+    private void TryDamageBoss(Collider2D colliderHit)
+    {
+        BossHealth bossHealth = colliderHit.GetComponent<BossHealth>();
+
+        if (bossHealth != null)
+        {
+            bossHealth.TakeDamage(1);
         }
     }
 
