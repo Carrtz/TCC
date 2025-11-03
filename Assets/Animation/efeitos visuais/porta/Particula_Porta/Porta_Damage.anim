@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: porta non hit
+  m_Name: Porta_Damage
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 7111396506342550342, guid: 88bd9c0dd541fbf4d81ad46d6011f356, type: 3}
+      value: {fileID: -5731007519719342125, guid: 0b1bcd0ae1d364047b08a0ba062ff7ae, type: 3}
+    - time: 0.15
+      value: {fileID: 1247029558971092846, guid: 85b2331e390caa442856a59613dfa63e, type: 3}
+    - time: 0.3
+      value: {fileID: -5731007519719342125, guid: 0b1bcd0ae1d364047b08a0ba062ff7ae, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,13 +48,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 7111396506342550342, guid: 88bd9c0dd541fbf4d81ad46d6011f356, type: 3}
+    - {fileID: -5731007519719342125, guid: 0b1bcd0ae1d364047b08a0ba062ff7ae, type: 3}
+    - {fileID: 1247029558971092846, guid: 85b2331e390caa442856a59613dfa63e, type: 3}
+    - {fileID: -5731007519719342125, guid: 0b1bcd0ae1d364047b08a0ba062ff7ae, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.3166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
