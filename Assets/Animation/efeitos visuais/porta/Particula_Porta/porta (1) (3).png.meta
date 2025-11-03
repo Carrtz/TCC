@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 70a3e9b2b397be24b91d300fae464e16
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2129465886235801563
+    second: porta (1) (3)_0
+  - first:
+      213: -455144588365135225
+    second: porta (1) (3)_1
+  - first:
+      213: 4700713336233544012
+    second: porta (1) (3)_2
+  - first:
+      213: 4773636301061377428
+    second: porta (1) (3)_3
+  - first:
+      213: 9020954440923898201
+    second: porta (1) (3)_4
+  - first:
+      213: -8835362640407193870
+    second: porta (1) (3)_5
+  - first:
+      213: 1733830125385737409
+    second: porta (1) (3)_6
+  - first:
+      213: -2911632315514375427
+    second: porta (1) (3)_7
+  - first:
+      213: -7789477934804861073
+    second: porta (1) (3)_8
+  - first:
+      213: 3976782692330820182
+    second: porta (1) (3)_9
+  - first:
+      213: 1633884890207167925
+    second: porta (1) (3)_10
+  - first:
+      213: 8863455367504939802
+    second: porta (1) (3)_11
+  - first:
+      213: 9123994509833285484
+    second: porta (1) (3)_12
+  - first:
+      213: -8785998714510267000
+    second: porta (1) (3)_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: porta (1) (3)_0
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 687
+        width: 233
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5284a911f0e9272e0800000000000000
+      internalID: -2129465886235801563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_1
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 616
+        width: 165
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7820e0988600fa9f0800000000000000
+      internalID: -455144588365135225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_2
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 732
+        width: 286
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c494425bfd94c3140800000000000000
+      internalID: 4700713336233544012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_3
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 597
+        width: 213
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49d4cab8cec5f3240800000000000000
+      internalID: 4773636301061377428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_4
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 525
+        width: 207
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 951604ad44ed03d70800000000000000
+      internalID: 9020954440923898201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_5
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 367
+        width: 298
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f695c48d7c726580800000000000000
+      internalID: -8835362640407193870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_6
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 431
+        width: 322
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c4ec74105dcf0810800000000000000
+      internalID: 1733830125385737409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_7
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 80
+        width: 260
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df2b735e5ddc797d0800000000000000
+      internalID: -2911632315514375427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_8
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 272
+        width: 137
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6f7636b61736e390800000000000000
+      internalID: -7789477934804861073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_9
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 303
+        width: 186
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 652dc4de9ce503730800000000000000
+      internalID: 3976782692330820182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_10
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 107
+        width: 272
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b52da4a6a9bca610800000000000000
+      internalID: 1633884890207167925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_11
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 3
+        width: 160
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1b49a632b1510b70800000000000000
+      internalID: 8863455367504939802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_12
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 6
+        width: 175
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6f2a3b6aa0fe9e70800000000000000
+      internalID: 9123994509833285484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: porta (1) (3)_13
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 4
+        width: 271
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88da39828bcd11680800000000000000
+      internalID: -8785998714510267000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      porta (1) (3)_0: -2129465886235801563
+      porta (1) (3)_1: -455144588365135225
+      porta (1) (3)_10: 1633884890207167925
+      porta (1) (3)_11: 8863455367504939802
+      porta (1) (3)_12: 9123994509833285484
+      porta (1) (3)_13: -8785998714510267000
+      porta (1) (3)_2: 4700713336233544012
+      porta (1) (3)_3: 4773636301061377428
+      porta (1) (3)_4: 9020954440923898201
+      porta (1) (3)_5: -8835362640407193870
+      porta (1) (3)_6: 1733830125385737409
+      porta (1) (3)_7: -2911632315514375427
+      porta (1) (3)_8: -7789477934804861073
+      porta (1) (3)_9: 3976782692330820182
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
