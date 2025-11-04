@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
@@ -169,6 +170,10 @@ public class BossController : MonoBehaviour
                 }
             }
         }
+
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene("Win");
     }
 
     IEnumerator BossIntro()
