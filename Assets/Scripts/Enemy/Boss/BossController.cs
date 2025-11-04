@@ -9,6 +9,7 @@ public class BossController : MonoBehaviour
     public Transform leftShootPosition;
     public Transform rightShootPosition;
     public PlayerHealth playerHealth;
+    public GameObject[] objectsToDestroy;
     
     [Header("Componentes")]
     public Animator bossAnimator;
@@ -151,11 +152,23 @@ public class BossController : MonoBehaviour
         }
 
         SetAnimation(animDeath);
-        
+
         yield return new WaitForSeconds(5f);
-        
+
         Debug.Log("Boss morreu!");
-        Destroy(gameObject);
+
+        // Destruir todos os objetos no array
+        if (objectsToDestroy != null && objectsToDestroy.Length > 0)
+        {
+            foreach (GameObject obj in objectsToDestroy)
+            {
+                if (obj != null)
+                {
+                    Destroy(obj);
+                    Debug.Log("Objeto destruído: " + obj.name);
+                }
+            }
+        }
     }
 
     IEnumerator BossIntro()
