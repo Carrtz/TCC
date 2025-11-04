@@ -19,27 +19,14 @@ public class Item : MonoBehaviour
         Debug.Log("Chave coletada!");
     }
 
-    public void Drop()
-    {
-        IsPickedUp = false;
-        HasKey = false;
-        transform.SetParent(null);
-        GetComponent<Collider2D>().enabled = true;
-
-        // Opcional: reativar renderizador
-        GetComponent<SpriteRenderer>().enabled = true;
-
-        Debug.Log("Chave largada!");
-    }
-
-    // Método para destruir a chave
+    // Mï¿½todo para destruir a chave
     public void ConsumeKey()
     {
         if (IsPickedUp)
         {
             HasKey = false;
             Destroy(gameObject);
-            Debug.Log("Chave foi usada e destruída!");
+            Debug.Log("Chave foi usada e destruï¿½da!");
         }
     }
 }

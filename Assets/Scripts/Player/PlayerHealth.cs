@@ -4,14 +4,17 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxHealth = 10;
     [SerializeField] private float invincibilityTime = 1f;
     [SerializeField] private float blinkInterval = 0.1f;
+    [SerializeField] private int maxHealingUses = 2;
+    [SerializeField] private int healAmount = 4;
 
     [Header("Visual Settings")]
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private int currentHealth;
+    private int remainingHealingUses;
     private bool isInvincible = false;
     private float invincibilityTimer = 0f;
     private float blinkTimer = 0f;
@@ -19,13 +22,14 @@ public class PlayerHealth : MonoBehaviour
 
     public event System.Action OnPlayerDeath;
     public event System.Action<int> OnHealthChanged;
+    public event System.Action<int> OnHealingUsed;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        remainingHealingUses = maxHealingUses;
         OnHealthChanged?.Invoke(currentHealth);
 
-        // Se o SpriteRenderer não foi atribuído pelo Inspector, tenta encontrar no próprio objeto
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -42,7 +46,6 @@ public class PlayerHealth : MonoBehaviour
         {
             invincibilityTimer -= Time.deltaTime;
             
-            // Controle do efeito de piscar
             blinkTimer -= Time.deltaTime;
             if (blinkTimer <= 0)
             {
@@ -54,6 +57,30 @@ public class PlayerHealth : MonoBehaviour
             {
                 EndInvincibility();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UseHealing();
+        }
+    }
+
+    private void UseHealing()
+    {
+        if (remainingHealingUses > 0 && currentHealth < maxHealth)
+        {
+            Heal(healAmount);
+            remainingHealingUses--;
+            
+            Debug.Log($"Curou {healAmount} de vida! Usos restantes: {remainingHealingUses}");
+        }
+        else if (remainingHealingUses <= 0)
+        {
+            Debug.Log("Sem usos de cura restantes!");
+        }
+        else if (currentHealth >= maxHealth)
+        {
+            Debug.Log("Vida já está no máximo!");
         }
     }
 
@@ -81,7 +108,6 @@ public class PlayerHealth : MonoBehaviour
         blinkTimer = blinkInterval;
         isVisible = true;
         
-        // Garante que o sprite está visível no início da invencibilidade
         if (spriteRenderer != null)
         {
             SetSpriteAlpha(1f);
@@ -92,7 +118,6 @@ public class PlayerHealth : MonoBehaviour
     {
         isInvincible = false;
         
-        // Garante que o sprite fique totalmente visível ao final da invencibilidade
         if (spriteRenderer != null)
         {
             SetSpriteAlpha(1f);
@@ -141,6 +166,16 @@ public class PlayerHealth : MonoBehaviour
         OnHealthChanged?.Invoke(currentHealth);
     }
 
+    public void AddHealingUses(int amount)
+    {
+        remainingHealingUses = Mathf.Min(remainingHealingUses + amount, maxHealingUses);
+    }
+
+    public void ResetHealingUses()
+    {
+        remainingHealingUses = maxHealingUses;
+    }
+
     public bool IsInvincible()
     {
         return isInvincible;
@@ -154,5 +189,15 @@ public class PlayerHealth : MonoBehaviour
     public int GetCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public int GetRemainingHealingUses()
+    {
+        return remainingHealingUses;
+    }
+
+    public int GetMaxHealingUses()
+    {
+        return maxHealingUses;
     }
 }

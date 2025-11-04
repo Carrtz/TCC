@@ -138,18 +138,6 @@ namespace TarodevController
                     }
                 }
             }
-            else if (_isHoldingItem && Input.GetKeyDown(KeyCode.Q))
-            {
-                DropItem();
-            }
-        }
-
-        private void DropItem()
-        {
-            if (!_isHoldingItem) return;
-
-            _currentItem.Drop();
-            _currentItem = null;
         }
 
         private void GatherInput()
