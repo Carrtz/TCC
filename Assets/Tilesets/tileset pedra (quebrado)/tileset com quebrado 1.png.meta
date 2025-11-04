@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e6c7857158d479c43ab1c66aeeeb4323
+guid: a5d540494d1946e4a84a3fde63157ede
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3781353221560718494
-    second: particula_tileset_quebrado (8)_0
+      213: 6199432724877504065
+    second: tileset com quebrado 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: particula_tileset_quebrado (8)_0
+      name: tileset com quebrado 1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1080
-        height: 1080
+        x: 484
+        y: 479
+        width: 232
+        height: 362
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26b289a874fe58bc0800000000000000
-      internalID: -3781353221560718494
+      spriteID: 14e614f973fc80650800000000000000
+      internalID: 6199432724877504065
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      particula_tileset_quebrado (8)_0: -3781353221560718494
+      tileset com quebrado 1_0: 6199432724877504065
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

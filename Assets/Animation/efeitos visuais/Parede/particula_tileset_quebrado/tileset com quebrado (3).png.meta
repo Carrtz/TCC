@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: a0e0ae9edc0baef4eac2dab0120e2ac6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1465563352616793469
+    second: tileset com quebrado (3)_0
+  - first:
+      213: 5486275240626797088
+    second: tileset com quebrado (3)_1
+  - first:
+      213: -1026400774561978181
+    second: tileset com quebrado (3)_2
+  - first:
+      213: 4899141733378680499
+    second: tileset com quebrado (3)_3
+  - first:
+      213: 8111906932818726256
+    second: tileset com quebrado (3)_4
+  - first:
+      213: -8272175577512981250
+    second: tileset com quebrado (3)_5
+  - first:
+      213: -4793019310179635137
+    second: tileset com quebrado (3)_6
+  - first:
+      213: -5705469345886227704
+    second: tileset com quebrado (3)_7
+  - first:
+      213: -6682819686952338370
+    second: tileset com quebrado (3)_8
+  - first:
+      213: 7284326441580140145
+    second: tileset com quebrado (3)_9
+  - first:
+      213: -3582523230729759404
+    second: tileset com quebrado (3)_10
+  - first:
+      213: -158202316427710362
+    second: tileset com quebrado (3)_11
+  - first:
+      213: 6514330269353778872
+    second: tileset com quebrado (3)_12
+  - first:
+      213: 2803340927167284486
+    second: tileset com quebrado (3)_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_0
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 479
+        width: 217
+        height: 361
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d75fd84ba1ab65410800000000000000
+      internalID: 1465563352616793469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_1
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 789
+        width: 63
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ab499834a232c40800000000000000
+      internalID: 5486275240626797088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_2
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 758
+        width: 72
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb82c030fed71c1f0800000000000000
+      internalID: -1026400774561978181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_3
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 672
+        width: 75
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b6e352237f3df340800000000000000
+      internalID: 4899141733378680499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_4
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 710
+        width: 61
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07d40bd6068439070800000000000000
+      internalID: 8111906932818726256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_5
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 675
+        width: 39
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efc4daed324533d80800000000000000
+      internalID: -8272175577512981250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_6
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 562
+        width: 99
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f30b727f456cb7db0800000000000000
+      internalID: -4793019310179635137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_7
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 629
+        width: 69
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8033299dbd912d0b0800000000000000
+      internalID: -5705469345886227704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_8
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 595
+        width: 42
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3cf73dd6ead143a0800000000000000
+      internalID: -6682819686952338370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_9
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 552
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1769e5afd40271560800000000000000
+      internalID: 7284326441580140145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_10
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 528
+        width: 75
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45594c84a12584ec0800000000000000
+      internalID: -3582523230729759404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_11
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 487
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 660bea6d4d3fdcdf0800000000000000
+      internalID: -158202316427710362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_12
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 487
+        width: 26
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8be18669ddc876a50800000000000000
+      internalID: 6514330269353778872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tileset com quebrado (3)_13
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 485
+        width: 97
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 605ce1478b777e620800000000000000
+      internalID: 2803340927167284486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ada06d3f5357f7b44810d33d4f84d4ac
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      tileset com quebrado (3)_0: 1465563352616793469
+      tileset com quebrado (3)_1: 5486275240626797088
+      tileset com quebrado (3)_10: -3582523230729759404
+      tileset com quebrado (3)_11: -158202316427710362
+      tileset com quebrado (3)_12: 6514330269353778872
+      tileset com quebrado (3)_13: 2803340927167284486
+      tileset com quebrado (3)_2: -1026400774561978181
+      tileset com quebrado (3)_3: 4899141733378680499
+      tileset com quebrado (3)_4: 8111906932818726256
+      tileset com quebrado (3)_5: -8272175577512981250
+      tileset com quebrado (3)_6: -4793019310179635137
+      tileset com quebrado (3)_7: -5705469345886227704
+      tileset com quebrado (3)_8: -6682819686952338370
+      tileset com quebrado (3)_9: 7284326441580140145
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
