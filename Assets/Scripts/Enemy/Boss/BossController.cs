@@ -97,7 +97,21 @@ public class BossController : MonoBehaviour
         currentState = BossState.Idle;
         introPosition = transform.position;
         SetAnimation(animIdle);
+
     }
+    private void Update()
+    {
+        transform.position = new Vector3(
+    Mathf.Clamp(transform.position.x, 
+        arenaBounds.bounds.min.x + bossCollider.bounds.extents.x, 
+        arenaBounds.bounds.max.x - bossCollider.bounds.extents.x),
+    transform.position.y,
+    transform.position.z
+);
+
+    }
+
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -137,7 +151,7 @@ public class BossController : MonoBehaviour
     public void StartDeath()
     {
         if (currentState == BossState.Dead) return;
-        
+        SetAnimation(animShootStart);
         currentState = BossState.Dead;
         fightStarted = false;
         StopAllCoroutines();
@@ -308,8 +322,9 @@ public class BossController : MonoBehaviour
             {
                 hitWallOrCeiling = true;
             }
-            
-            transform.position = newPosition;
+
+            transform.position = new Vector3(ClampXToArena(newPosition.x), newPosition.y, newPosition.z);
+
             dashTimer += Time.deltaTime;
             yield return null;
         }
@@ -373,7 +388,8 @@ public class BossController : MonoBehaviour
         {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, dashSpeed * Time.deltaTime);
             if (IsTouchingWallOrCeiling(newPosition)) break;
-            transform.position = newPosition;
+            transform.position = new Vector3(ClampXToArena(newPosition.x), newPosition.y, newPosition.z);
+
             yield return null;
         }
 
@@ -400,7 +416,8 @@ public class BossController : MonoBehaviour
         {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, oppositeTargetPosition, dashSpeed * Time.deltaTime);
             if (IsTouchingWallOrCeiling(newPosition)) break;
-            transform.position = newPosition;
+            transform.position = new Vector3(ClampXToArena(newPosition.x), newPosition.y, newPosition.z);
+
             yield return null;
         }
         
@@ -409,9 +426,10 @@ public class BossController : MonoBehaviour
 
     IEnumerator DiveAttack()
     {
+
         if (currentState == BossState.Dead) yield break;
         
-        SetAnimation(animDiveStart);
+     
         
         Vector3 spawnPosition = new Vector3(player.position.x, player.position.y + diveDistance, player.position.z);
         transform.position = spawnPosition;
@@ -451,8 +469,8 @@ public class BossController : MonoBehaviour
     {
         if (currentState == BossState.Dead) yield break;
         
-        float distanceToLeftWall = Mathf.Abs(player.position.x - leftShootPosition.position.x);
-        float distanceToRightWall = Mathf.Abs(player.position.x - rightShootPosition.position.x);
+        float distanceToLeftWall = Mathf.Abs(player.position.x - leftShootPosition.position.x + wallCheckTolerance);
+        float distanceToRightWall = Mathf.Abs(player.position.x - rightShootPosition.position.x - wallCheckTolerance);
         
         Transform shootPosition;
         
@@ -527,15 +545,18 @@ public class BossController : MonoBehaviour
     bool IsTouchingWallOrCeiling(Vector3 position)
     {
         if (bossCollider == null || arenaBounds == null) return false;
-        
+
         Bounds bossBounds = bossCollider.bounds;
         Vector3 offset = position - transform.position;
         Bounds predictedBounds = new Bounds(bossBounds.center + offset, bossBounds.size);
-        
-        bool touchingLeftWall = predictedBounds.min.x <= arenaBounds.bounds.min.x + wallCheckTolerance;
-        bool touchingRightWall = predictedBounds.max.x >= arenaBounds.bounds.max.x - wallCheckTolerance;
+
+        float bossHalfWidth = bossBounds.extents.x;
+        float bossHalfHeight = bossBounds.extents.y;
+
+        bool touchingLeftWall = predictedBounds.min.x <= arenaBounds.bounds.min.x + bossHalfWidth * 0.5f;
+        bool touchingRightWall = predictedBounds.max.x >= arenaBounds.bounds.max.x - bossHalfWidth * 0.5f;
         bool touchingCeiling = predictedBounds.max.y >= arenaBounds.bounds.max.y - wallCheckTolerance;
-        
+
         return touchingLeftWall || touchingRightWall || touchingCeiling;
     }
 
@@ -544,6 +565,17 @@ public class BossController : MonoBehaviour
         if (bossCollider != null)
             return bossCollider.bounds.extents.x;
         return 0.5f;
+
+
+    }
+    float ClampXToArena(float x)
+    {
+        if (arenaBounds == null || bossCollider == null) return x;
+
+        float minX = arenaBounds.bounds.min.x + bossCollider.bounds.extents.x;
+        float maxX = arenaBounds.bounds.max.x - bossCollider.bounds.extents.x;
+
+        return Mathf.Clamp(x, minX, maxX);
     }
 
     void CreateProjectile()

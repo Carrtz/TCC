@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float blinkInterval = 0.1f;
     [SerializeField] private int maxHealingUses = 2;
     [SerializeField] private int healAmount = 4;
+    [SerializeField] private Animator animator;
 
     [Header("Visual Settings")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -70,6 +71,7 @@ public class PlayerHealth : MonoBehaviour
         if (remainingHealingUses > 0 && currentHealth < maxHealth)
         {
             Heal(healAmount);
+            animator.SetTrigger("Heal");
             remainingHealingUses--;
             
             Debug.Log($"Curou {healAmount} de vida! Usos restantes: {remainingHealingUses}");

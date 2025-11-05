@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69299a301c18af84dad28240e356e1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBarUI
-  playerHealth: {fileID: 297761237}
+  playerHealth: {fileID: 297761249}
   healthFill: {fileID: 511089697}
 --- !u!222 &45515963
 CanvasRenderer:
@@ -380,7 +380,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4855596731407334193, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
   m_PrefabInstance: {fileID: 583579967}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &297761237
+--- !u!4 &297761243 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4855596731407334206, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+  m_PrefabInstance: {fileID: 583579967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &297761249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -391,18 +396,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93af41f79e8873c4ab01ea5596abd14e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 10
   invincibilityTime: 1
   blinkInterval: 0.1
   maxHealingUses: 2
   healAmount: 4
+  animator: {fileID: 586048367}
   spriteRenderer: {fileID: 586048366}
---- !u!4 &297761243 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4855596731407334206, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
-  m_PrefabInstance: {fileID: 583579967}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &306284313
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,12 +949,17 @@ PrefabInstance:
       addedObject: {fileID: 2061261662}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4855596731407334193, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 297761237}
+      insertIndex: -1
+      addedObject: {fileID: 297761249}
   m_SourcePrefab: {fileID: 100100000, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
 --- !u!212 &586048366 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 9167367220621938362, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
+  m_PrefabInstance: {fileID: 583579967}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &586048367 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9167367220621938363, guid: c2fbeb226a62eea439a9b4bbac975913, type: 3}
   m_PrefabInstance: {fileID: 583579967}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &636397970
@@ -8316,7 +8322,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.02, y: 0, z: 0}
-  m_LocalScale: {x: 21.1, y: 9.69, z: 1}
+  m_LocalScale: {x: 20.48, y: 9.69, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 69874098}
@@ -8790,7 +8796,7 @@ Transform:
   m_GameObject: {fileID: 1850672217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.46, y: -72.66, z: 0}
+  m_LocalPosition: {x: -19.38, y: -72.66, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -8879,8 +8885,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.36}
-  m_Size: {x: 1.64, y: 2.92}
+  m_Offset: {x: 0, y: 0.12}
+  m_Size: {x: 1.73, y: 3.46}
   m_Direction: 0
 --- !u!114 &1850672224
 MonoBehaviour:
@@ -8898,7 +8904,7 @@ MonoBehaviour:
   arenaBounds: {fileID: 909695005}
   leftShootPosition: {fileID: 1531678999}
   rightShootPosition: {fileID: 1863822453}
-  playerHealth: {fileID: 297761237}
+  playerHealth: {fileID: 297761249}
   objectsToDestroy:
   - {fileID: 879931546}
   - {fileID: 689072031}
@@ -8911,12 +8917,12 @@ MonoBehaviour:
   shortRestDuration: 0
   longRestDuration: 0.5
   attackDelay: 1
-  groundCheckTolerance: 0.05
-  wallCheckTolerance: 0.05
+  groundCheckTolerance: 1
+  wallCheckTolerance: 3
   movementStopThreshold: 0.1
   dashSpeed: 20
   dashAttackSpawnDistance: 2
-  dashAttackAimTime: 0.8
+  dashAttackAimTime: 1
   dashAttackDuration: 1
   dashAttackWallPause: 0.1
   diveSpeed: 20
