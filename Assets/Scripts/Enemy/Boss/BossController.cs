@@ -13,7 +13,7 @@ public class BossController : MonoBehaviour
     public GameObject[] objectsToDestroy;
     
     [Header("Componentes")]
-    public Animator bossAnimator;
+    public SpriteRenderer bossSpriteRenderer;
     
     [Header("Prefabs")]
     public GameObject shockwavePrefab;
@@ -55,63 +55,59 @@ public class BossController : MonoBehaviour
     public int damageAmount = 1;
     public float damageCooldown = 1f;
 
-    private readonly int animIntro = Animator.StringToHash("Intro");
-    private readonly int animIdle = Animator.StringToHash("Idle");
-    private readonly int animDashFall = Animator.StringToHash("DashFall");
-    private readonly int animDashImpact = Animator.StringToHash("DashImpact");
-    private readonly int animDashLeft = Animator.StringToHash("DashLeft");
-    private readonly int animDashRight = Animator.StringToHash("DashRight");
-    private readonly int animDashWallHit = Animator.StringToHash("DashWallHit");
-    private readonly int animRest = Animator.StringToHash("Rest");
-    private readonly int animLongRest = Animator.StringToHash("LongRest");
-    private readonly int animDiveStart = Animator.StringToHash("DiveStart");
-    private readonly int animDiveFall = Animator.StringToHash("DiveFall");
-    private readonly int animDiveImpact = Animator.StringToHash("DiveImpact");
-    private readonly int animShootStart = Animator.StringToHash("ShootStart");
-    private readonly int animShooting = Animator.StringToHash("Shooting");
-    private readonly int animShootEnd = Animator.StringToHash("ShootEnd");
-    private readonly int animDeath = Animator.StringToHash("Death");
-    
+    [Header("Sprites de Animação")]
+    public Sprite introSprite;
+    public Sprite idleSprite;
+    public Sprite dashFallSprite;
+    public Sprite dashImpactSprite;
+    public Sprite dashLeftSprite;
+    public Sprite dashRightSprite;
+    public Sprite restSprite;
+    public Sprite longRestSprite;
+    public Sprite diveStartSprite;
+    public Sprite diveFallSprite;
+    public Sprite diveImpactSprite;
+    public Sprite shootStartSprite;
+    public Sprite shootingSprite;
+    public Sprite shootEndSprite;
+    public Sprite deathSprite;
+
     private enum BossState { Intro, Idle, Attacking, Resting, Dead }
     private BossState currentState;
     private int consecutiveAttacks = 0;
     private bool fightStarted = false;
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Vector3 introPosition;
     private Collider2D bossCollider;
     private bool canDamage = true;
+    private Coroutine currentAnimationRoutine;
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (bossSpriteRenderer == null)
+            bossSpriteRenderer = GetComponent<SpriteRenderer>();
+            
         rb = GetComponent<Rigidbody2D>();
         bossCollider = GetComponent<Collider2D>();
-        
-        if (bossAnimator == null)
-            bossAnimator = GetComponent<Animator>();
     }
 
     void Start()
     {
         currentState = BossState.Idle;
         introPosition = transform.position;
-        SetAnimation(animIdle);
-
+        SetSprite(idleSprite);
     }
+
     private void Update()
     {
         transform.position = new Vector3(
-    Mathf.Clamp(transform.position.x, 
-        arenaBounds.bounds.min.x + bossCollider.bounds.extents.x, 
-        arenaBounds.bounds.max.x - bossCollider.bounds.extents.x),
-    transform.position.y,
-    transform.position.z
-);
-
+            Mathf.Clamp(transform.position.x, 
+                arenaBounds.bounds.min.x + bossCollider.bounds.extents.x, 
+                arenaBounds.bounds.max.x - bossCollider.bounds.extents.x),
+            transform.position.y,
+            transform.position.z
+        );
     }
-
-
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -151,11 +147,14 @@ public class BossController : MonoBehaviour
     public void StartDeath()
     {
         if (currentState == BossState.Dead) return;
-        SetAnimation(animShootStart);
+        
+        StopAllCoroutines();
+        if (currentAnimationRoutine != null)
+            StopCoroutine(currentAnimationRoutine);
+            
         currentState = BossState.Dead;
         fightStarted = false;
-        StopAllCoroutines();
-        StartCoroutine(DeathRoutine());
+        currentAnimationRoutine = StartCoroutine(DeathRoutine());
     }
 
     IEnumerator DeathRoutine()
@@ -166,7 +165,7 @@ public class BossController : MonoBehaviour
             rb.isKinematic = true;
         }
 
-        SetAnimation(animDeath);
+        SetSprite(deathSprite);
 
         yield return new WaitForSeconds(5f);
 
@@ -193,7 +192,7 @@ public class BossController : MonoBehaviour
     IEnumerator BossIntro()
     {
         currentState = BossState.Intro;
-        SetAnimation(animIntro);
+        SetSprite(introSprite);
         
         float timer = 0f;
         while (timer < introDuration)
@@ -211,7 +210,7 @@ public class BossController : MonoBehaviour
         while (fightStarted && currentState != BossState.Dead)
         {
             currentState = BossState.Idle;
-            SetAnimation(animIdle);
+            SetSprite(idleSprite);
             rb.linearVelocity = Vector2.zero;
             
             yield return new WaitForSeconds(0.5f);
@@ -225,18 +224,22 @@ public class BossController : MonoBehaviour
                 consecutiveAttacks++;
                 
                 currentState = BossState.Resting;
-                SetAnimation(animLongRest);
-                yield return new WaitForSeconds(longRestDuration);
+                yield return StartCoroutine(PlayRestAnimation(longRestSprite, longRestDuration));
             }
             else
             {
                 currentState = BossState.Resting;
-                SetAnimation(animRest);
-                yield return new WaitForSeconds(shortRestDuration);
+                yield return StartCoroutine(PlayRestAnimation(restSprite, shortRestDuration));
             }
             
             consecutiveAttacks = 0;
         }
+    }
+
+    IEnumerator PlayRestAnimation(Sprite restSprite, float duration)
+    {
+        SetSprite(restSprite);
+        yield return new WaitForSeconds(duration);
     }
 
     IEnumerator ExecuteRandomAttack()
@@ -287,23 +290,20 @@ public class BossController : MonoBehaviour
         spawnPosition.y = player.position.y + diveDistance;
         transform.position = spawnPosition;
         
-        SetAnimation(animDashFall);
+        // Animação de queda do dash
+        SetSprite(dashFallSprite);
         yield return new WaitForSeconds(dashAttackAimTime);
         
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         Vector3 horizontalDirection = new Vector3(directionToPlayer.x, 0, 0).normalized;
         
-        SetAnimation(animDashImpact);
+        // Animação de impacto
+        SetSprite(dashImpactSprite);
         yield return new WaitForSeconds(0.2f);
         
-        if (horizontalDirection.x > 0)
-        {
-            SetAnimation(animDashRight);
-        }
-        else
-        {
-            SetAnimation(animDashLeft);
-        }
+        // Animação de dash na direção correta
+        Sprite dashSprite = horizontalDirection.x > 0 ? dashRightSprite : dashLeftSprite;
+        SetSprite(dashSprite);
         
         float dashTimer = 0f;
         bool reachedGround = false;
@@ -333,7 +333,8 @@ public class BossController : MonoBehaviour
 
         if (hitWallOrCeiling)
         {
-            SetAnimation(animDashWallHit);
+            // Animação de idle durante a pausa na parede
+            SetSprite(idleSprite);
             
             Vector3 groundPosition = new Vector3(transform.position.x, GetGroundHeight(), transform.position.z);
             
@@ -345,21 +346,20 @@ public class BossController : MonoBehaviour
             
             transform.position = groundPosition;
             
-            SetAnimation(animIdle);
             yield return new WaitForSeconds(dashAttackWallPause);
             
             yield return StartCoroutine(MoveToWallInDirection(horizontalDirection));
         }
         else if (reachedGround)
         {
-            SetAnimation(animIdle);
+            SetSprite(idleSprite);
             yield return new WaitForSeconds(dashAttackWallPause);
             
             yield return StartCoroutine(MoveToWallInDirection(horizontalDirection));
         }
         else
         {
-            SetAnimation(animIdle);
+            SetSprite(idleSprite);
             yield return new WaitForSeconds(dashAttackWallPause);
             
             yield return StartCoroutine(MoveToWallInDirection(horizontalDirection));
@@ -371,17 +371,20 @@ public class BossController : MonoBehaviour
         if (currentState == BossState.Dead) yield break;
         
         float targetX;
+        Sprite dashSprite;
+        
         if (direction.x > 0)
         {
             targetX = arenaBounds.bounds.max.x - GetBossHalfWidth();
-            SetAnimation(animDashRight);
+            dashSprite = dashRightSprite;
         }
         else
         {
             targetX = arenaBounds.bounds.min.x + GetBossHalfWidth();
-            SetAnimation(animDashLeft);
+            dashSprite = dashLeftSprite;
         }
 
+        SetSprite(dashSprite);
         Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 
         while (Mathf.Abs(transform.position.x - targetX) > movementStopThreshold && currentState != BossState.Dead)
@@ -389,27 +392,29 @@ public class BossController : MonoBehaviour
             Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, dashSpeed * Time.deltaTime);
             if (IsTouchingWallOrCeiling(newPosition)) break;
             transform.position = new Vector3(ClampXToArena(newPosition.x), newPosition.y, newPosition.z);
-
             yield return null;
         }
 
-        SetAnimation(animIdle);
-        yield return new WaitForSeconds(dashAttackWallPause);
+        SetSprite(idleSprite);
+        yield return new WaitForSeconds(0.1f); // Tempo de espera entre os dashes
 
+        // Dash de volta na direção oposta
         Vector3 oppositeDirection = -direction;
         float oppositeTargetX;
+        Sprite oppositeDashSprite;
         
         if (oppositeDirection.x > 0)
         {
             oppositeTargetX = arenaBounds.bounds.max.x - GetBossHalfWidth();
-            SetAnimation(animDashRight);
+            oppositeDashSprite = dashRightSprite;
         }
         else
         {
             oppositeTargetX = arenaBounds.bounds.min.x + GetBossHalfWidth();
-            SetAnimation(animDashLeft);
+            oppositeDashSprite = dashLeftSprite;
         }
 
+        SetSprite(oppositeDashSprite);
         Vector3 oppositeTargetPosition = new Vector3(oppositeTargetX, transform.position.y, transform.position.z);
 
         while (Mathf.Abs(transform.position.x - oppositeTargetX) > movementStopThreshold && currentState != BossState.Dead)
@@ -417,24 +422,25 @@ public class BossController : MonoBehaviour
             Vector3 newPosition = Vector3.MoveTowards(transform.position, oppositeTargetPosition, dashSpeed * Time.deltaTime);
             if (IsTouchingWallOrCeiling(newPosition)) break;
             transform.position = new Vector3(ClampXToArena(newPosition.x), newPosition.y, newPosition.z);
-
             yield return null;
         }
         
-        SetAnimation(animIdle);
+        SetSprite(idleSprite);
     }
 
     IEnumerator DiveAttack()
     {
-
         if (currentState == BossState.Dead) yield break;
-        
-     
         
         Vector3 spawnPosition = new Vector3(player.position.x, player.position.y + diveDistance, player.position.z);
         transform.position = spawnPosition;
         
-        SetAnimation(animDiveFall);
+        // Animação do início do dive
+        SetSprite(diveStartSprite);
+        yield return new WaitForSeconds(0.2f);
+        
+        // Animação da queda do dive
+        SetSprite(diveFallSprite);
         
         float followTimer = 0f;
         while (followTimer < diveAttackFollowTime && currentState != BossState.Dead)
@@ -447,7 +453,8 @@ public class BossController : MonoBehaviour
         
         if (currentState == BossState.Dead) yield break;
         
-        SetAnimation(animDiveImpact);
+        // Animação de impacto do dive
+        SetSprite(diveImpactSprite);
         
         float groundY = GetGroundHeight();
         Vector3 groundPosition = new Vector3(transform.position.x, groundY, transform.position.z);
@@ -462,7 +469,7 @@ public class BossController : MonoBehaviour
         CreateShockwave();
         
         yield return new WaitForSeconds(diveAttackPostShockwavePause);
-        SetAnimation(animIdle);
+        SetSprite(idleSprite);
     }
 
     IEnumerator ShootAttack()
@@ -489,10 +496,12 @@ public class BossController : MonoBehaviour
         scale.x = Mathf.Abs(scale.x) * (player.position.x > transform.position.x ? 1f : -1f);
         transform.localScale = scale;
         
-        SetAnimation(animShootStart);
+        // Animação do início do ataque à distância
+        SetSprite(shootStartSprite);
         yield return new WaitForSeconds(shootAttackWarningTime);
         
-        SetAnimation(animShooting);
+        // Animação dos tiros
+        SetSprite(shootingSprite);
         
         for (int i = 0; i < shootAttackProjectileCount; i++)
         {
@@ -501,33 +510,17 @@ public class BossController : MonoBehaviour
             yield return new WaitForSeconds(shootAttackBetweenShotsDelay);
         }
         
-        SetAnimation(animShootEnd);
+        // Animação do final dos tiros
+        SetSprite(shootEndSprite);
         yield return new WaitForSeconds(0.3f);
-        SetAnimation(animIdle);
+        SetSprite(idleSprite);
     }
 
-    private void SetAnimation(int animationHash)
+    private void SetSprite(Sprite sprite)
     {
-        if (bossAnimator != null && currentState != BossState.Dead)
+        if (bossSpriteRenderer != null && sprite != null && currentState != BossState.Dead)
         {
-            bossAnimator.SetBool(animIntro, false);
-            bossAnimator.SetBool(animIdle, false);
-            bossAnimator.SetBool(animDashFall, false);
-            bossAnimator.SetBool(animDashImpact, false);
-            bossAnimator.SetBool(animDashLeft, false);
-            bossAnimator.SetBool(animDashRight, false);
-            bossAnimator.SetBool(animDashWallHit, false);
-            bossAnimator.SetBool(animRest, false);
-            bossAnimator.SetBool(animLongRest, false);
-            bossAnimator.SetBool(animDiveStart, false);
-            bossAnimator.SetBool(animDiveFall, false);
-            bossAnimator.SetBool(animDiveImpact, false);
-            bossAnimator.SetBool(animShootStart, false);
-            bossAnimator.SetBool(animShooting, false);
-            bossAnimator.SetBool(animShootEnd, false);
-            bossAnimator.SetBool(animDeath, false);
-
-            bossAnimator.SetBool(animationHash, true);
+            bossSpriteRenderer.sprite = sprite;
         }
     }
 
@@ -565,9 +558,8 @@ public class BossController : MonoBehaviour
         if (bossCollider != null)
             return bossCollider.bounds.extents.x;
         return 0.5f;
-
-
     }
+
     float ClampXToArena(float x)
     {
         if (arenaBounds == null || bossCollider == null) return x;
